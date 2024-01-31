@@ -1,0 +1,15 @@
+{
+  "name": "nodejs-backend-skeleton",
+  "version": "1.0.0",
+  "description": "Node.js backend skeleton",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "name": "René Kulik",
+    "email": "rene@kulik.io",
+    "url": "https://www.kulik.io/"
+  },
+  "license": "MIT"
+}
