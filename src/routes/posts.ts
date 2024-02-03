@@ -1,9 +1,10 @@
 import { FastifyPluginCallback } from 'fastify';
 
-import { CreatePostDto, PostsController, UpdatePostDto } from '../controllers/posts-controller';
+import { CreatePostDto, UpdatePostDto } from '../controllers/posts-controller';
+import { Factory } from '../factory';
 
 const posts: FastifyPluginCallback = (server, _options, done) => {
-  const postsController = new PostsController();
+  const postsController = new Factory().createPostsController();
 
   server.get('/posts', (_request, reply) => {
     reply.send(postsController.read());
