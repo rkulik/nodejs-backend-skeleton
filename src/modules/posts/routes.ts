@@ -1,7 +1,6 @@
+import { Factory } from '@app/factory';
+import { CreatePostDto, UpdatePostDto } from '@modules/posts/dtos';
 import { FastifyPluginCallback } from 'fastify';
-
-import { CreatePostDto, UpdatePostDto } from './dtos';
-import { Factory } from '../../factory';
 
 const posts: FastifyPluginCallback = (server, _options, done) => {
   const postsController = new Factory().createPostsController();

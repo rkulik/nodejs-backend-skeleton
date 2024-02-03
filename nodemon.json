@@ -1,5 +1,5 @@
 {
-  "exec": "ts-node ./src/index.ts",
+  "exec": "ts-node --require tsconfig-paths/register ./src/index.ts",
   "ext": "ts",
   "ignore": [
     "src/**/*.test.ts"

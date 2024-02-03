@@ -1,6 +1,6 @@
-import { config } from './config';
-import { buildServer } from './setup/build-server';
-import { startServer } from './setup/start-server';
+import { config } from '@app/config';
+import { buildServer } from '@setup/build-server';
+import { startServer } from '@setup/start-server';
 
 const main = async (): Promise<void> => {
   const {

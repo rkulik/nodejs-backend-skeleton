@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Node.js backend skeleton",
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "tsc --project tsconfig.json && tsc-alias --project tsconfig.json",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "lint": "eslint src --ext .ts",
@@ -33,6 +33,8 @@
     "nodemon": "3.0.3",
     "prettier": "3.2.4",
     "ts-node": "10.9.2",
+    "tsc-alias": "1.8.8",
+    "tsconfig-paths": "4.2.0",
     "typescript": "5.3.3"
   }
 }

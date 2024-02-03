@@ -1,5 +1,5 @@
-import { CreatePostDto, UpdatePostDto } from '../dtos';
-import { Post } from '../types';
+import { CreatePostDto, UpdatePostDto } from '@modules/posts/dtos';
+import { Post } from '@modules/posts/types';
 
 const posts: Post[] = [
   {

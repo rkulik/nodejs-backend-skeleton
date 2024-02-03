@@ -3,6 +3,7 @@
   "compilerOptions": {
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
+    "baseUrl": "./src",
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,6 +17,17 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "dist",
+    "paths": {
+      "@modules/*": [
+        "./modules/*"
+      ],
+      "@setup/*": [
+        "./setup/*"
+      ],
+      "@app/*": [
+        "./*"
+      ]
+    },
     "resolveJsonModule": true,
     "rootDir": "src",
     "skipLibCheck": true,

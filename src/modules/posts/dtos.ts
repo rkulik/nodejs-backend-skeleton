@@ -1,4 +1,4 @@
-import { Post } from './types';
+import { Post } from '@modules/posts/types';
 
 export type CreatePostDto = Omit<Post, 'id'>;
 
