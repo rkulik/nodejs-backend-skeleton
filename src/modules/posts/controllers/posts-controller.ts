@@ -1,12 +1,5 @@
-type Post = {
-  id: number;
-  title: string;
-  content: string;
-};
-
-export type CreatePostDto = Omit<Post, 'id'>;
-
-export type UpdatePostDto = Omit<Post, 'id'>;
+import { CreatePostDto, UpdatePostDto } from '../dtos';
+import { Post } from '../types';
 
 const posts: Post[] = [
   {
