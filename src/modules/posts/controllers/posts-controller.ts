@@ -1,5 +1,5 @@
-import { Factory } from '@app/factory';
 import { CreatePostDto, Post, UpdatePostDto } from '@modules/posts/schemas';
+import { Factory } from '@src/factory';
 
 export class PostsController {
   public constructor(private factory: Factory) {}

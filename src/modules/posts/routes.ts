@@ -1,5 +1,5 @@
-import { Factory } from '@app/factory';
 import { CreatePostDto, UpdatePostDto } from '@modules/posts/schemas';
+import { Factory } from '@src/factory';
 import { FastifyPluginCallback } from 'fastify';
 
 const posts: FastifyPluginCallback = (server, _options, done) => {

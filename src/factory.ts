@@ -1,5 +1,3 @@
-import { SqliteDatabase } from '@app/sqlite-database';
-import { Database } from '@app/types';
 import { config } from '@configs/server';
 import { CreatePostAction } from '@modules/posts/actions/create-post-action';
 import { DeletePostAction } from '@modules/posts/actions/delete-post-action';
@@ -7,6 +5,8 @@ import { ReadPostAction } from '@modules/posts/actions/read-post-action';
 import { ReadPostsAction } from '@modules/posts/actions/read-posts-action';
 import { UpdatePostAction } from '@modules/posts/actions/update-post-action';
 import { PostsController } from '@modules/posts/controllers/posts-controller';
+import { SqliteDatabase } from '@src/sqlite-database';
+import { Database } from '@src/types';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 
 export class Factory {

@@ -1,5 +1,5 @@
-import { Action, Database } from '@app/types';
 import { Post, posts } from '@modules/posts/schemas';
+import { Action, Database } from '@src/types';
 
 export class ReadPostsAction implements Action<Post[]> {
   public constructor(private database: Database) {}

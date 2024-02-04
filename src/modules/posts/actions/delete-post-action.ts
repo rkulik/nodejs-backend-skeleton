@@ -1,5 +1,5 @@
-import { Action, Database } from '@app/types';
 import { posts } from '@modules/posts/schemas';
+import { Action, Database } from '@src/types';
 import { eq } from 'drizzle-orm';
 
 export class DeletePostAction implements Action<boolean> {

@@ -1,5 +1,5 @@
-import { Action, Database } from '@app/types';
 import { Post, UpdatePostDto, posts } from '@modules/posts/schemas';
+import { Action, Database } from '@src/types';
 import { eq } from 'drizzle-orm';
 
 export class UpdatePostAction implements Action<Post> {
