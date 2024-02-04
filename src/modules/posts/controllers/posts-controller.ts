@@ -1,55 +1,32 @@
+import { Factory } from '@app/factory';
 import { CreatePostDto, UpdatePostDto } from '@modules/posts/dtos';
 import { Post } from '@modules/posts/types';
 
-const posts: Post[] = [
-  {
-    id: 1,
-    title: 'First post',
-    content: 'The content of the first post',
-  },
-  {
-    id: 2,
-    title: 'Second post',
-    content: 'The content of the second post',
-  },
-];
-
 export class PostsController {
+  public constructor(private factory: Factory) {}
+
+  public create(createPostDto: CreatePostDto): Post {
+    return this.factory.createCreatePostAction().execute(createPostDto);
+  }
+
   public read(): Post[] {
-    return posts;
+    return this.factory.createReadPostsAction().execute();
   }
 
   public readOne(id: number): Post | undefined {
-    return posts.find((post) => {
-      return post.id === id;
-    });
-  }
-
-  public create(createPostDto: CreatePostDto): Post {
-    return {
-      id: 3,
-      ...createPostDto,
-    };
+    return this.factory.createReadPostAction().execute(id);
   }
 
   public update(id: number, updatePostDto: UpdatePostDto): Post | undefined {
-    const existingPost = posts.find((post) => {
-      return post.id === id;
-    });
+    const existingPost = this.factory.createReadPostAction().execute(id);
+    if (!existingPost) {
+      return undefined;
+    }
 
-    return existingPost
-      ? {
-          ...existingPost,
-          ...updatePostDto,
-        }
-      : undefined;
+    return this.factory.createUpdatePostAction().execute(existingPost, updatePostDto);
   }
 
   public delete(id: number): boolean {
-    return posts
-      .map((post) => {
-        return post.id;
-      })
-      .includes(id);
+    return this.factory.createDeletePostAction().execute(id);
   }
 }
