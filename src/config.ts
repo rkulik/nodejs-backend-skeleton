@@ -6,5 +6,6 @@ export const config = {
   server: {
     port: Number(process.env.PORT!),
     host: process.env.HOST!,
+    apiPrefix: process.env.API_PREFIX!,
   },
 };
