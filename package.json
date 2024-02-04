@@ -23,7 +23,10 @@
     "better-sqlite3": "9.4.0",
     "dotenv": "16.4.1",
     "drizzle-orm": "0.29.3",
-    "fastify": "4.26.0"
+    "drizzle-zod": "0.5.1",
+    "fastify": "4.26.0",
+    "fastify-type-provider-zod": "1.1.9",
+    "zod": "3.22.4"
   },
   "devDependencies": {
     "@types/better-sqlite3": "7.6.9",

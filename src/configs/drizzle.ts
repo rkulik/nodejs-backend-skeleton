@@ -1,7 +1,7 @@
 import type { Config } from 'drizzle-kit';
 
 const config: Config = {
-  schema: 'src/modules/*/schemas.ts',
+  schema: 'src/modules/*/schemas/database.ts',
   out: 'src/migrations',
   driver: 'better-sqlite',
   dbCredentials: {

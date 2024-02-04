@@ -1,6 +1,7 @@
-import { FastifyInstance, FastifyListenOptions } from 'fastify';
+import { CustomFastifyInstance } from '@src/types';
+import { FastifyListenOptions } from 'fastify';
 
-export const startServer = async (server: FastifyInstance, options: FastifyListenOptions): Promise<void> => {
+export const startServer = async (server: CustomFastifyInstance, options: FastifyListenOptions): Promise<void> => {
   try {
     const address = await server.listen(options);
     console.log(`Server is listening at: ${address}`);

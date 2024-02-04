@@ -1,29 +1,29 @@
-import { CreatePostDto, UpdatePostDto } from '@modules/posts/schemas';
+import { createPostSchema, deletePostSchema, getPostSchema, updatePostSchema } from '@modules/posts/schemas/base';
 import { Factory } from '@src/factory';
-import { FastifyPluginCallback } from 'fastify';
+import { CustomFastifyPluginCallback } from '@src/types';
 
-const posts: FastifyPluginCallback = (server, _options, done) => {
+const posts: CustomFastifyPluginCallback = (server, _options, done) => {
   const postsController = new Factory().createPostsController();
+
+  server.post('/posts', { schema: createPostSchema }, (request, reply) => {
+    reply.send(postsController.create(request.body));
+  });
 
   server.get('/posts', (_request, reply) => {
     reply.send(postsController.read());
   });
 
-  server.get<{ Params: { id: string } }>('/posts/:id', (request, reply) => {
+  server.get('/posts/:id', { schema: getPostSchema }, (request, reply) => {
     const post = postsController.readOne(Number(request.params.id));
     post ? reply.send(post) : reply.code(404).send({ error: { message: 'Not found' } });
   });
 
-  server.post<{ Body: CreatePostDto }>('/posts', (request, reply) => {
-    reply.send(postsController.create(request.body));
-  });
-
-  server.put<{ Params: { id: string }; Body: UpdatePostDto }>('/posts/:id', (request, reply) => {
+  server.put('/posts/:id', { schema: updatePostSchema }, (request, reply) => {
     const updatedPost = postsController.update(Number(request.params.id), request.body);
     updatedPost ? reply.send(updatedPost) : reply.code(404).send({ error: { message: 'Not found' } });
   });
 
-  server.delete<{ Params: { id: string } }>('/posts/:id', (request, reply) => {
+  server.delete('/posts/:id', { schema: deletePostSchema }, (request, reply) => {
     const isDeleted = postsController.delete(Number(request.params.id));
     isDeleted ? reply.code(204).send() : reply.code(404).send({ error: { message: 'Not found' } });
   });

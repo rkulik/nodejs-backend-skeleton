@@ -1,4 +1,5 @@
-import { Post, UpdatePostDto, posts } from '@modules/posts/schemas';
+import { Post, UpdatePostDto } from '@modules/posts/schemas/base';
+import { posts } from '@modules/posts/schemas/database';
 import { Action, Database } from '@src/types';
 import { eq } from 'drizzle-orm';
 

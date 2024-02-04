@@ -1,4 +1,4 @@
-import { posts } from '@modules/posts/schemas';
+import { posts } from '@modules/posts/schemas/database';
 import { Action, Database } from '@src/types';
 import { eq } from 'drizzle-orm';
 

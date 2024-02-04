@@ -1,4 +1,4 @@
-import { CreatePostDto, Post, UpdatePostDto } from '@modules/posts/schemas';
+import { CreatePostDto, Post, UpdatePostDto } from '@modules/posts/schemas/base';
 import { Factory } from '@src/factory';
 
 export class PostsController {
