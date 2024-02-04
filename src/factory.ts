@@ -1,6 +1,6 @@
-import { config } from '@app/configs/server';
 import { SqliteDatabase } from '@app/sqlite-database';
 import { Database } from '@app/types';
+import { config } from '@configs/server';
 import { CreatePostAction } from '@modules/posts/actions/create-post-action';
 import { DeletePostAction } from '@modules/posts/actions/delete-post-action';
 import { ReadPostAction } from '@modules/posts/actions/read-post-action';

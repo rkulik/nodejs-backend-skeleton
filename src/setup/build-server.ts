@@ -1,4 +1,4 @@
-import { config } from '@app/configs/server';
+import { config } from '@configs/server';
 import autload from '@fastify/autoload';
 import fastify, { FastifyInstance } from 'fastify';
 

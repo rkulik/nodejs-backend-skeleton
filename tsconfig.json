@@ -24,6 +24,9 @@
       "@setup/*": [
         "./setup/*"
       ],
+      "@configs/*": [
+        "./configs/*"
+      ],
       "@app/*": [
         "./*"
       ]

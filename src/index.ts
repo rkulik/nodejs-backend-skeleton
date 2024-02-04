@@ -1,4 +1,4 @@
-import { config } from '@app/configs/server';
+import { config } from '@configs/server';
 import { buildServer } from '@setup/build-server';
 import { startServer } from '@setup/start-server';
 
