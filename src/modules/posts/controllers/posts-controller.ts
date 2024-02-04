@@ -1,6 +1,5 @@
 import { Factory } from '@app/factory';
-import { CreatePostDto, UpdatePostDto } from '@modules/posts/dtos';
-import { Post } from '@modules/posts/types';
+import { CreatePostDto, Post, UpdatePostDto } from '@modules/posts/schemas';
 
 export class PostsController {
   public constructor(private factory: Factory) {}

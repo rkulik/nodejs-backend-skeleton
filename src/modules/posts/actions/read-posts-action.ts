@@ -1,9 +1,10 @@
-import { Action } from '@app/types';
-import { posts } from '@modules/posts/mocks/posts';
-import { Post } from '@modules/posts/types';
+import { Action, Database } from '@app/types';
+import { Post, posts } from '@modules/posts/schemas';
 
 export class ReadPostsAction implements Action<Post[]> {
+  public constructor(private database: Database) {}
+
   public execute(): Post[] {
-    return posts;
+    return this.database.select().from(posts).all();
   }
 }

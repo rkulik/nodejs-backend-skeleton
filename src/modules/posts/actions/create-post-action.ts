@@ -1,12 +1,10 @@
-import { Action } from '@app/types';
-import { CreatePostDto } from '@modules/posts/dtos';
-import { Post } from '@modules/posts/types';
+import { Action, Database } from '@app/types';
+import { CreatePostDto, Post, posts } from '@modules/posts/schemas';
 
 export class CreatePostAction implements Action<Post> {
+  public constructor(private database: Database) {}
+
   public execute(createPostDto: CreatePostDto): Post {
-    return {
-      id: 3,
-      ...createPostDto,
-    };
+    return this.database.insert(posts).values(createPostDto).returning().get();
   }
 }

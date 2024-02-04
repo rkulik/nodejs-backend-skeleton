@@ -15,23 +15,23 @@ export class Factory {
   }
 
   public createReadPostsAction(): ReadPostsAction {
-    return new ReadPostsAction();
+    return new ReadPostsAction(this.createDatabase());
   }
 
   public createReadPostAction(): ReadPostAction {
-    return new ReadPostAction();
+    return new ReadPostAction(this.createDatabase());
   }
 
   public createCreatePostAction(): CreatePostAction {
-    return new CreatePostAction();
+    return new CreatePostAction(this.createDatabase());
   }
 
   public createUpdatePostAction(): UpdatePostAction {
-    return new UpdatePostAction();
+    return new UpdatePostAction(this.createDatabase());
   }
 
   public createDeletePostAction(): DeletePostAction {
-    return new DeletePostAction();
+    return new DeletePostAction(this.createDatabase());
   }
 
   public createDatabase(): Database {

@@ -1,11 +1,11 @@
-import { Action } from '@app/types';
-import { posts } from '@modules/posts/mocks/posts';
-import { Post } from '@modules/posts/types';
+import { Action, Database } from '@app/types';
+import { Post, posts } from '@modules/posts/schemas';
+import { eq } from 'drizzle-orm';
 
 export class ReadPostAction implements Action<Post | undefined> {
+  public constructor(private database: Database) {}
+
   public execute(id: number): Post | undefined {
-    return posts.find((post) => {
-      return post.id === id;
-    });
+    return this.database.select().from(posts).where(eq(posts.id, id)).get();
   }
 }
