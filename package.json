@@ -7,6 +7,8 @@
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "lint": "eslint src --ext .ts",
+    "migrate:generate": "drizzle-kit generate:sqlite --config=src/configs/database.ts",
+    "migrate:push": "drizzle-kit push:sqlite --config=src/configs/database.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,12 +20,16 @@
   "license": "MIT",
   "dependencies": {
     "@fastify/autoload": "5.8.0",
+    "better-sqlite3": "9.4.0",
     "dotenv": "16.4.1",
+    "drizzle-orm": "0.29.3",
     "fastify": "4.26.0"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "7.6.9",
     "@types/node": "20.11.13",
     "@typescript-eslint/eslint-plugin": "6.20.0",
+    "drizzle-kit": "0.20.14",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-destructuring": "2.2.1",

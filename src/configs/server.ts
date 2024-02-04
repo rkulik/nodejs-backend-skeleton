@@ -8,4 +8,7 @@ export const config = {
     host: process.env.HOST!,
     apiPrefix: process.env.API_PREFIX!,
   },
+  database: {
+    url: process.env.DATABASE_URL!,
+  },
 };

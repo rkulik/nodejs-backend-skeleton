@@ -1,9 +1,13 @@
+import { config } from '@app/configs/server';
+import { Database } from '@app/types';
 import { CreatePostAction } from '@modules/posts/actions/create-post-action';
 import { DeletePostAction } from '@modules/posts/actions/delete-post-action';
 import { ReadPostAction } from '@modules/posts/actions/read-post-action';
 import { ReadPostsAction } from '@modules/posts/actions/read-posts-action';
 import { UpdatePostAction } from '@modules/posts/actions/update-post-action';
 import { PostsController } from '@modules/posts/controllers/posts-controller';
+import { default as SQLiteDatabase } from 'better-sqlite3';
+import { drizzle } from 'drizzle-orm/better-sqlite3';
 
 export class Factory {
   public createPostsController(): PostsController {
@@ -28,5 +32,11 @@ export class Factory {
 
   public createDeletePostAction(): DeletePostAction {
     return new DeletePostAction();
+  }
+
+  public createDatabase(): Database {
+    const sqliteDatabase = new SQLiteDatabase(config.database.url);
+
+    return drizzle(sqliteDatabase);
   }
 }
