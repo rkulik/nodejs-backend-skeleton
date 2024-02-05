@@ -7,8 +7,8 @@
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "lint": "eslint src --ext .ts",
-    "migrate:generate": "drizzle-kit generate:sqlite --config=src/configs/database.ts",
-    "migrate:push": "drizzle-kit push:sqlite --config=src/configs/database.ts",
+    "migrate:generate": "drizzle-kit generate:sqlite --config=src/configs/drizzle.ts",
+    "migrate:push": "drizzle-kit push:sqlite --config=src/configs/drizzle.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
