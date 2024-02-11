@@ -7,6 +7,11 @@ export class UpdatePostAction implements Action<Post> {
   public constructor(private database: Database) {}
 
   public execute(post: Post, updatePostDto: UpdatePostDto): Post {
-    return this.database.update(posts).set(updatePostDto).where(eq(posts.id, post.id)).returning().get();
+    return this.database
+      .update(posts)
+      .set({ ...updatePostDto, updatedAt: new Date() })
+      .where(eq(posts.id, post.id))
+      .returning()
+      .get();
   }
 }

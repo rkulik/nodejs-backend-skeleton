@@ -4,6 +4,19 @@ import { FromSchema } from 'json-schema-to-ts';
 
 export type Post = InferSelectModel<typeof posts>;
 
+const postSchema = {
+  type: 'object',
+  properties: {
+    id: { type: 'number' },
+    title: { type: 'string' },
+    content: { type: 'string' },
+    createdAt: { type: 'number' },
+    updatedAt: { type: 'number', nullable: true },
+  },
+  required: ['id', 'title', 'content', 'createdAt', 'updatedAt'],
+  additionalProperties: false,
+};
+
 export const createPostSchema = {
   schema: {
     body: {
@@ -23,16 +36,7 @@ export const createPostSchema = {
           data: {
             type: 'object',
             properties: {
-              post: {
-                type: 'object',
-                properties: {
-                  id: { type: 'number' },
-                  title: { type: 'string' },
-                  content: { type: 'string' },
-                },
-                required: ['id', 'title', 'content'],
-                additionalProperties: false,
-              },
+              post: postSchema,
             },
             required: ['post'],
             additionalProperties: false,
@@ -59,16 +63,7 @@ export const getPostsSchema = {
             properties: {
               posts: {
                 type: 'array',
-                items: {
-                  type: 'object',
-                  properties: {
-                    id: { type: 'number' },
-                    title: { type: 'string' },
-                    content: { type: 'string' },
-                  },
-                  required: ['id', 'title', 'content'],
-                  additionalProperties: false,
-                },
+                items: postSchema,
               },
             },
             required: ['posts'],
@@ -100,16 +95,7 @@ export const getPostSchema = {
           data: {
             type: 'object',
             properties: {
-              post: {
-                type: 'object',
-                properties: {
-                  id: { type: 'number' },
-                  title: { type: 'string' },
-                  content: { type: 'string' },
-                },
-                required: ['id', 'title', 'content'],
-                additionalProperties: false,
-              },
+              post: postSchema,
             },
             required: ['post'],
             additionalProperties: false,
@@ -165,16 +151,7 @@ export const updatePostSchema = {
           data: {
             type: 'object',
             properties: {
-              post: {
-                type: 'object',
-                properties: {
-                  id: { type: 'number' },
-                  title: { type: 'string' },
-                  content: { type: 'string' },
-                },
-                required: ['id', 'title', 'content'],
-                additionalProperties: false,
-              },
+              post: postSchema,
             },
             required: ['post'],
             additionalProperties: false,

@@ -6,6 +6,10 @@ export class CreatePostAction implements Action<Post> {
   public constructor(private database: Database) {}
 
   public execute(createPostDto: CreatePostDto): Post {
-    return this.database.insert(posts).values(createPostDto).returning().get();
+    return this.database
+      .insert(posts)
+      .values({ ...createPostDto, createdAt: new Date() })
+      .returning()
+      .get();
   }
 }
