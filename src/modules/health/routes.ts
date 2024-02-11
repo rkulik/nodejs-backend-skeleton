@@ -1,8 +1,8 @@
-import { FastifyPluginCallback } from 'fastify';
+import { CustomFastifyPluginCallback } from '@src/types';
 
-const health: FastifyPluginCallback = (server, _options, done) => {
+const health: CustomFastifyPluginCallback = (server, _options, done) => {
   server.get('/health', (_request, reply) => {
-    reply.code(200).send({ status: 'OK' });
+    reply.sendSuccess({ status: 'healthy' });
   });
 
   done();
