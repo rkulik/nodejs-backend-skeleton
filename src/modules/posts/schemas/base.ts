@@ -10,10 +10,11 @@ const postSchema = {
     id: { type: 'number' },
     title: { type: 'string' },
     content: { type: 'string' },
+    publishedAt: { type: 'number', nullable: true },
     createdAt: { type: 'number' },
     updatedAt: { type: 'number', nullable: true },
   },
-  required: ['id', 'title', 'content', 'createdAt', 'updatedAt'],
+  required: ['id', 'title', 'content', 'publishedAt', 'createdAt', 'updatedAt'],
   additionalProperties: false,
 };
 

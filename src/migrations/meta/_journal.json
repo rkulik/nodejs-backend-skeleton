@@ -15,6 +15,13 @@
       "when": 1707689931224,
       "tag": "0001_panoramic_nomad",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1707691314735,
+      "tag": "0002_wooden_frog_thor",
+      "breakpoints": true
     }
   ]
 }

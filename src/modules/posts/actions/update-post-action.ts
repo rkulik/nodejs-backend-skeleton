@@ -9,7 +9,10 @@ export class UpdatePostAction implements Action<Post> {
   public execute(post: Post, updatePostDto: UpdatePostDto): Post {
     return this.database
       .update(posts)
-      .set({ ...updatePostDto, updatedAt: new Date() })
+      .set({
+        ...updatePostDto,
+        updatedAt: new Date(),
+      })
       .where(eq(posts.id, post.id))
       .returning()
       .get();

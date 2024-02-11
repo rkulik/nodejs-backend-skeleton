@@ -5,6 +5,7 @@ export const posts = sqliteTable('posts', {
   id: integer('id').primaryKey(),
   title: text('title').notNull(),
   content: text('content').notNull(),
+  publishedAt: integer('published_at', { mode: 'timestamp' }),
   createdAt: integer('created_at', { mode: 'timestamp' })
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),

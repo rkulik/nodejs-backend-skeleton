@@ -8,7 +8,10 @@ export class CreatePostAction implements Action<Post> {
   public execute(createPostDto: CreatePostDto): Post {
     return this.database
       .insert(posts)
-      .values({ ...createPostDto, createdAt: new Date() })
+      .values({
+        ...createPostDto,
+        createdAt: new Date(),
+      })
       .returning()
       .get();
   }
