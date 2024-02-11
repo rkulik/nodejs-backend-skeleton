@@ -1,10 +1,10 @@
-import { CustomFastifyPluginCallback } from '@src/types';
+import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 import { FastifyReply } from 'fastify';
 import fp from 'fastify-plugin';
 
 type Data = Record<string, unknown>;
 
-const jsend: CustomFastifyPluginCallback = (server, _options, done) => {
+const jsend: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
   server.decorateReply('sendSuccess', function (this: FastifyReply, data: Data | null = null): FastifyReply {
     return this.send({ status: 'success', data });
   });

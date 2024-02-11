@@ -1,7 +1,8 @@
-import { CustomFastifyPluginCallback } from '@src/types';
+import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
+import { getHealthSchema } from '@modules/health/schemas/base';
 
-const health: CustomFastifyPluginCallback = (server, _options, done) => {
-  server.get('/health', (_request, reply) => {
+const health: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
+  server.get('/health', getHealthSchema, (_request, reply) => {
     reply.sendSuccess({ status: 'healthy' });
   });
 
