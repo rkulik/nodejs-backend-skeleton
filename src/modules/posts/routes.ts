@@ -24,17 +24,17 @@ const posts: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
   });
 
   server.get('/posts/:id', getPostSchema, (request, reply) => {
-    const post = postsController.readOne(Number(request.params.id));
+    const post = postsController.readOne(request.params.id);
     post ? reply.sendSuccess({ post }) : reply.code(404).sendFail({ message: 'Not found' });
   });
 
   server.put('/posts/:id', updatePostSchema, (request, reply) => {
-    const updatedPost = postsController.update(Number(request.params.id), request.body);
+    const updatedPost = postsController.update(request.params.id, request.body);
     updatedPost ? reply.sendSuccess({ post: updatedPost }) : reply.code(404).sendFail({ message: 'Not found' });
   });
 
   server.delete('/posts/:id', deletePostSchema, (request, reply) => {
-    const isDeleted = postsController.delete(Number(request.params.id));
+    const isDeleted = postsController.delete(request.params.id);
     isDeleted ? reply.code(204).send() : reply.code(404).sendFail({ message: 'Not found' });
   });
 

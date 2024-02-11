@@ -83,7 +83,7 @@ export const getPostSchema = {
     params: {
       type: 'object',
       properties: {
-        id: { type: 'string' },
+        id: { type: 'number' },
       },
       required: ['id'],
       additionalProperties: false,
@@ -130,7 +130,7 @@ export const updatePostSchema = {
     params: {
       type: 'object',
       properties: {
-        id: { type: 'string' },
+        id: { type: 'number' },
       },
       required: ['id'],
       additionalProperties: false,
@@ -188,7 +188,7 @@ export const deletePostSchema = {
     params: {
       type: 'object',
       properties: {
-        id: { type: 'string' },
+        id: { type: 'number' },
       },
       required: ['id'],
       additionalProperties: false,
