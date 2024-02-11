@@ -214,3 +214,99 @@ export const deletePostSchema = {
     },
   },
 } as const;
+
+export const publishPostSchema = {
+  schema: {
+    body: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+      },
+      required: ['id'],
+      additionalProperties: false,
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          status: { type: 'string' },
+          data: {
+            type: 'object',
+            properties: {
+              post: postSchema,
+            },
+            required: ['post'],
+            additionalProperties: false,
+          },
+        },
+        required: ['status', 'data'],
+        additionalProperties: false,
+      },
+      404: {
+        type: 'object',
+        properties: {
+          status: { type: 'string' },
+          data: {
+            type: 'object',
+            properties: {
+              message: { type: 'string' },
+            },
+            required: ['message'],
+            additionalProperties: false,
+          },
+        },
+        required: ['status', 'data'],
+        additionalProperties: false,
+      },
+    },
+  },
+} as const;
+
+export type PublishPostDto = FromSchema<typeof publishPostSchema.schema.body>;
+
+export const unpublishPostSchema = {
+  schema: {
+    params: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+      },
+      required: ['id'],
+      additionalProperties: false,
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          status: { type: 'string' },
+          data: {
+            type: 'object',
+            properties: {
+              post: postSchema,
+            },
+            required: ['post'],
+            additionalProperties: false,
+          },
+        },
+        required: ['status', 'data'],
+        additionalProperties: false,
+      },
+      404: {
+        type: 'object',
+        properties: {
+          status: { type: 'string' },
+          data: {
+            type: 'object',
+            properties: {
+              message: { type: 'string' },
+            },
+            required: ['message'],
+            additionalProperties: false,
+          },
+        },
+        required: ['status', 'data'],
+        additionalProperties: false,
+      },
+    },
+  },
+} as const;
