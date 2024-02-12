@@ -2,6 +2,7 @@ import { config } from '@configs/base';
 import autload from '@fastify/autoload';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
+import factory from '@setup/plugins/factory';
 import jsend from '@setup/plugins/jsend';
 import fastify, { FastifyInstance } from 'fastify';
 
@@ -9,6 +10,7 @@ import path from 'path';
 
 export const buildServer = (): FastifyInstance => {
   return fastify()
+    .register(factory)
     .register(jsend)
     .register(fastifySwagger, {
       openapi: {

@@ -8,12 +8,10 @@ import {
   unpublishPostSchema,
   updatePostSchema,
 } from '@modules/posts/schemas/base';
-import { Factory } from '@src/factory';
 
 const posts: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
-  const factory = new Factory();
-  const postsController = factory.createPostsController();
-  const publishedPostsController = factory.createPublishedPostsController();
+  const postsController = server.factory.createPostsController();
+  const publishedPostsController = server.factory.createPublishedPostsController();
 
   server.post('/posts', createPostSchema, (request, reply) => {
     reply.sendSuccess({ post: postsController.create(request.body) });
