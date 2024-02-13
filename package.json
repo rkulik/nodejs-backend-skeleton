@@ -2,6 +2,13 @@
   "name": "nodejs-backend-skeleton",
   "version": "1.0.0",
   "description": "Node.js backend skeleton",
+  "keywords": [],
+  "author": {
+    "name": "René Kulik",
+    "email": "rene@kulik.io",
+    "url": "https://www.kulik.io/"
+  },
+  "license": "MIT",
   "packageManager": "pnpm@8.9.0",
   "engines": {
     "node": "20.x",
@@ -16,13 +23,6 @@
     "migrate:push": "drizzle-kit push:sqlite --config=src/configs/drizzle.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": {
-    "name": "René Kulik",
-    "email": "rene@kulik.io",
-    "url": "https://www.kulik.io/"
-  },
-  "license": "MIT",
   "dependencies": {
     "@fastify/autoload": "5.8.0",
     "@fastify/swagger": "8.14.0",
