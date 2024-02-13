@@ -67,6 +67,56 @@ export const createCommentSchema = {
 
 export type CreateCommentDto = FromSchema<typeof createCommentSchema.schema.body>;
 
+export const getPostCommentsSchema = {
+  schema: {
+    params: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+      },
+      required: ['id'],
+      additionalProperties: false,
+    },
+    response: {
+      200: {
+        type: 'object',
+        properties: {
+          status: { type: 'string' },
+          data: {
+            type: 'object',
+            properties: {
+              comments: {
+                type: 'array',
+                items: commentSchema,
+              },
+            },
+            required: ['comments'],
+            additionalProperties: false,
+          },
+        },
+        required: ['status', 'data'],
+        additionalProperties: false,
+      },
+      404: {
+        type: 'object',
+        properties: {
+          status: { type: 'string' },
+          data: {
+            type: 'object',
+            properties: {
+              message: { type: 'string' },
+            },
+            required: ['message'],
+            additionalProperties: false,
+          },
+        },
+        required: ['status', 'data'],
+        additionalProperties: false,
+      },
+    },
+  },
+} as const;
+
 export const getCommentSchema = {
   schema: {
     params: {

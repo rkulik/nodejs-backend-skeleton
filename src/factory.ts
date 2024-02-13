@@ -2,8 +2,10 @@ import { config } from '@configs/base';
 import { CreateCommentAction } from '@modules/comments/actions/create-comment-action';
 import { DeleteCommentAction } from '@modules/comments/actions/delete-comment-action';
 import { ReadCommentAction } from '@modules/comments/actions/read-comment-action';
+import { ReadPostCommentsAction } from '@modules/comments/actions/read-post-comments-action';
 import { UpdateCommentAction } from '@modules/comments/actions/update-comment-action';
 import { CommentsController } from '@modules/comments/controllers/comments-controller';
+import { PostCommentsController } from '@modules/comments/controllers/post-comments-controller';
 import { CreatePostAction } from '@modules/posts/actions/create-post-action';
 import { DeletePostAction } from '@modules/posts/actions/delete-post-action';
 import { PublishPostAction } from '@modules/posts/actions/publish-post-action';
@@ -72,6 +74,14 @@ export class Factory {
 
   public createDeleteCommentAction(): DeleteCommentAction {
     return new DeleteCommentAction(this.createDatabase());
+  }
+
+  public createPostCommentsController(): PostCommentsController {
+    return new PostCommentsController(this);
+  }
+
+  public createReadPostCommentsAction(): ReadPostCommentsAction {
+    return new ReadPostCommentsAction(this.createDatabase());
   }
 
   public createDatabase(): Database {

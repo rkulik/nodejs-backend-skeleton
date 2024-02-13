@@ -3,15 +3,22 @@ import {
   createCommentSchema,
   deleteCommentSchema,
   getCommentSchema,
+  getPostCommentsSchema,
   updateCommentSchema,
 } from '@modules/comments/schemas/base';
 
 const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
   const commentsController = server.factory.createCommentsController();
+  const postCommentsController = server.factory.createPostCommentsController();
 
   server.post('/comments', createCommentSchema, (request, reply) => {
     const comment = commentsController.create(request.body);
     comment ? reply.sendSuccess({ comment }) : reply.code(404).sendFail({ message: 'Not found' });
+  });
+
+  server.get('/posts/:id/comments', getPostCommentsSchema, (request, reply) => {
+    const comments = postCommentsController.read(request.params.id);
+    comments ? reply.sendSuccess({ comments }) : reply.code(404).sendFail({ message: 'Not found' });
   });
 
   server.get('/comments/:id', getCommentSchema, (request, reply) => {
