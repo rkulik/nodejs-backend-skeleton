@@ -1,4 +1,5 @@
 import { posts } from '@modules/posts/schemas/database';
+import { notFoundSchema } from '@src/schemas';
 import { InferSelectModel } from 'drizzle-orm';
 import { FromSchema } from 'json-schema-to-ts';
 
@@ -105,22 +106,7 @@ export const getPostSchema = {
         required: ['status', 'data'],
         additionalProperties: false,
       },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;
@@ -161,22 +147,7 @@ export const updatePostSchema = {
         required: ['status', 'data'],
         additionalProperties: false,
       },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;
@@ -195,22 +166,7 @@ export const deletePostSchema = {
     },
     response: {
       204: { type: 'null' },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;
@@ -242,22 +198,7 @@ export const publishPostSchema = {
         required: ['status', 'data'],
         additionalProperties: false,
       },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;
@@ -291,22 +232,7 @@ export const unpublishPostSchema = {
         required: ['status', 'data'],
         additionalProperties: false,
       },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;

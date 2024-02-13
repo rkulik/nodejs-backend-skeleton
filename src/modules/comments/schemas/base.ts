@@ -1,4 +1,5 @@
 import { comments } from '@modules/comments/schemas/database';
+import { notFoundSchema } from '@src/schemas';
 import { InferSelectModel } from 'drizzle-orm';
 import { FromSchema } from 'json-schema-to-ts';
 
@@ -45,22 +46,7 @@ export const createCommentSchema = {
         required: ['status', 'data'],
         additionalProperties: false,
       },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;
@@ -97,22 +83,7 @@ export const getPostCommentsSchema = {
         required: ['status', 'data'],
         additionalProperties: false,
       },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;
@@ -144,22 +115,7 @@ export const getCommentSchema = {
         required: ['status', 'data'],
         additionalProperties: false,
       },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;
@@ -199,22 +155,7 @@ export const updateCommentSchema = {
         required: ['status', 'data'],
         additionalProperties: false,
       },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;
@@ -233,22 +174,7 @@ export const deleteCommentSchema = {
     },
     response: {
       204: { type: 'null' },
-      404: {
-        type: 'object',
-        properties: {
-          status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              message: { type: 'string' },
-            },
-            required: ['message'],
-            additionalProperties: false,
-          },
-        },
-        required: ['status', 'data'],
-        additionalProperties: false,
-      },
+      404: notFoundSchema,
     },
   },
 } as const;
