@@ -1,4 +1,9 @@
 import { config } from '@configs/base';
+import { CreateCommentAction } from '@modules/comments/actions/create-comment-action';
+import { DeleteCommentAction } from '@modules/comments/actions/delete-comment-action';
+import { ReadCommentAction } from '@modules/comments/actions/read-comment-action';
+import { UpdateCommentAction } from '@modules/comments/actions/update-comment-action';
+import { CommentsController } from '@modules/comments/controllers/comments-controller';
 import { CreatePostAction } from '@modules/posts/actions/create-post-action';
 import { DeletePostAction } from '@modules/posts/actions/delete-post-action';
 import { PublishPostAction } from '@modules/posts/actions/publish-post-action';
@@ -47,6 +52,26 @@ export class Factory {
 
   public createUnpublishPostAction(): UnpublishPostAction {
     return new UnpublishPostAction(this.createDatabase());
+  }
+
+  public createCommentsController(): CommentsController {
+    return new CommentsController(this);
+  }
+
+  public createCreateCommentAction(): CreateCommentAction {
+    return new CreateCommentAction(this.createDatabase());
+  }
+
+  public createReadCommentAction(): ReadCommentAction {
+    return new ReadCommentAction(this.createDatabase());
+  }
+
+  public createUpdateCommentAction(): UpdateCommentAction {
+    return new UpdateCommentAction(this.createDatabase());
+  }
+
+  public createDeleteCommentAction(): DeleteCommentAction {
+    return new DeleteCommentAction(this.createDatabase());
   }
 
   public createDatabase(): Database {
