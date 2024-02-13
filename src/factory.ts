@@ -37,7 +37,7 @@ export class Factory {
   }
 
   public createUpdatePostAction(): UpdatePostAction {
-    return new UpdatePostAction(this.createDatabase());
+    return new UpdatePostAction(this.createDatabase(), this.createReadPostAction());
   }
 
   public createDeletePostAction(): DeletePostAction {
@@ -49,11 +49,11 @@ export class Factory {
   }
 
   public createPublishPostAction(): PublishPostAction {
-    return new PublishPostAction(this.createDatabase());
+    return new PublishPostAction(this.createDatabase(), this.createReadPostAction());
   }
 
   public createUnpublishPostAction(): UnpublishPostAction {
-    return new UnpublishPostAction(this.createDatabase());
+    return new UnpublishPostAction(this.createDatabase(), this.createReadPostAction());
   }
 
   public createCommentsController(): CommentsController {
@@ -61,7 +61,7 @@ export class Factory {
   }
 
   public createCreateCommentAction(): CreateCommentAction {
-    return new CreateCommentAction(this.createDatabase());
+    return new CreateCommentAction(this.createDatabase(), this.createReadPostAction());
   }
 
   public createReadCommentAction(): ReadCommentAction {
@@ -69,7 +69,7 @@ export class Factory {
   }
 
   public createUpdateCommentAction(): UpdateCommentAction {
-    return new UpdateCommentAction(this.createDatabase());
+    return new UpdateCommentAction(this.createDatabase(), this.createReadCommentAction());
   }
 
   public createDeleteCommentAction(): DeleteCommentAction {
@@ -81,7 +81,7 @@ export class Factory {
   }
 
   public createReadPostCommentsAction(): ReadPostCommentsAction {
-    return new ReadPostCommentsAction(this.createDatabase());
+    return new ReadPostCommentsAction(this.createDatabase(), this.createReadPostAction());
   }
 
   public createDatabase(): Database {

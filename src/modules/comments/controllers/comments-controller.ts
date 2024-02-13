@@ -5,11 +5,6 @@ export class CommentsController {
   public constructor(private factory: Factory) {}
 
   public create(createCommentDto: CreateCommentDto): Comment | undefined {
-    const existingPost = this.factory.createReadPostAction().execute(createCommentDto.postId);
-    if (!existingPost) {
-      return undefined;
-    }
-
     return this.factory.createCreateCommentAction().execute(createCommentDto);
   }
 
@@ -18,12 +13,7 @@ export class CommentsController {
   }
 
   public update(id: number, updateCommentDto: UpdateCommentDto): Comment | undefined {
-    const existingComment = this.factory.createReadCommentAction().execute(id);
-    if (!existingComment) {
-      return undefined;
-    }
-
-    return this.factory.createUpdateCommentAction().execute(existingComment, updateCommentDto);
+    return this.factory.createUpdateCommentAction().execute(id, updateCommentDto);
   }
 
   public delete(id: number): boolean {

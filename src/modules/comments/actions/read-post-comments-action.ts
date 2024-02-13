@@ -1,12 +1,21 @@
 import { Comment } from '@modules/comments/schemas/base';
 import { comments } from '@modules/comments/schemas/database';
+import { ReadPostAction } from '@modules/posts/actions/read-post-action';
 import { Action, Database } from '@src/types';
 import { eq } from 'drizzle-orm';
 
-export class ReadPostCommentsAction implements Action<Comment[]> {
-  public constructor(private database: Database) {}
+export class ReadPostCommentsAction implements Action<Comment[] | undefined> {
+  public constructor(
+    private database: Database,
+    private readPostAction: ReadPostAction,
+  ) {}
 
-  public execute(id: number): Comment[] {
-    return this.database.select().from(comments).where(eq(comments.postId, id)).all();
+  public execute(id: number): Comment[] | undefined {
+    const existingPost = this.readPostAction.execute(id);
+    if (!existingPost) {
+      return undefined;
+    }
+
+    return this.database.select().from(comments).where(eq(comments.postId, existingPost.id)).all();
   }
 }

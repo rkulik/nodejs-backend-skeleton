@@ -17,12 +17,7 @@ export class PostsController {
   }
 
   public update(id: number, updatePostDto: UpdatePostDto): Post | undefined {
-    const existingPost = this.factory.createReadPostAction().execute(id);
-    if (!existingPost) {
-      return undefined;
-    }
-
-    return this.factory.createUpdatePostAction().execute(existingPost, updatePostDto);
+    return this.factory.createUpdatePostAction().execute(id, updatePostDto);
   }
 
   public delete(id: number): boolean {
