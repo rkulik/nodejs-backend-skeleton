@@ -2,6 +2,11 @@
   "name": "nodejs-backend-skeleton",
   "version": "1.0.0",
   "description": "Node.js backend skeleton",
+  "packageManager": "pnpm@8.9.0",
+  "engines": {
+    "node": "20.x",
+    "pnpm": "8.x"
+  },
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias --project tsconfig.json",
     "start": "node dist/index.js",
