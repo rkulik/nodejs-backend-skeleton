@@ -1,5 +1,5 @@
 import { comments } from '@modules/comments/schemas/database';
-import { notFoundSchema } from '@src/schemas';
+import { headersSchema, notFoundSchema, unauthorizedSchema } from '@src/schemas';
 import { InferSelectModel } from 'drizzle-orm';
 import { FromSchema } from 'json-schema-to-ts';
 
@@ -20,6 +20,7 @@ const commentSchema = {
 
 export const createCommentSchema = {
   schema: {
+    headers: headersSchema,
     body: {
       type: 'object',
       properties: {
@@ -47,6 +48,7 @@ export const createCommentSchema = {
         additionalProperties: false,
       },
       404: notFoundSchema,
+      401: unauthorizedSchema,
     },
   },
 } as const;
@@ -122,6 +124,7 @@ export const getCommentSchema = {
 
 export const updateCommentSchema = {
   schema: {
+    headers: headersSchema,
     params: {
       type: 'object',
       properties: {
@@ -156,6 +159,7 @@ export const updateCommentSchema = {
         additionalProperties: false,
       },
       404: notFoundSchema,
+      401: unauthorizedSchema,
     },
   },
 } as const;
@@ -164,6 +168,7 @@ export type UpdateCommentDto = FromSchema<typeof updateCommentSchema.schema.body
 
 export const deleteCommentSchema = {
   schema: {
+    headers: headersSchema,
     params: {
       type: 'object',
       properties: {
@@ -175,6 +180,7 @@ export const deleteCommentSchema = {
     response: {
       204: { type: 'null' },
       404: notFoundSchema,
+      401: unauthorizedSchema,
     },
   },
 } as const;

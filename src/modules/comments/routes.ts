@@ -1,4 +1,5 @@
 import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
+import ensureAuthenticated from '@modules/auth/hooks/ensure-authenticated';
 import {
   createCommentSchema,
   deleteCommentSchema,
@@ -11,7 +12,7 @@ const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) =
   const commentsController = server.factory.createCommentsController();
   const postCommentsController = server.factory.createPostCommentsController();
 
-  server.post('/comments', createCommentSchema, (request, reply) => {
+  server.post('/comments', { ...createCommentSchema, preHandler: ensureAuthenticated }, (request, reply) => {
     const comment = commentsController.create(request.body);
     comment ? reply.sendSuccess({ comment }) : reply.code(404).sendFail({ message: 'Post not found' });
   });
@@ -26,14 +27,14 @@ const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) =
     comment ? reply.sendSuccess({ comment }) : reply.code(404).sendFail({ message: 'Comment not found' });
   });
 
-  server.put('/comments/:id', updateCommentSchema, (request, reply) => {
+  server.put('/comments/:id', { ...updateCommentSchema, preHandler: ensureAuthenticated }, (request, reply) => {
     const updatedComment = commentsController.update(request.params.id, request.body);
     updatedComment
       ? reply.sendSuccess({ comment: updatedComment })
       : reply.code(404).sendFail({ message: 'Comment not found' });
   });
 
-  server.delete('/comments/:id', deleteCommentSchema, (request, reply) => {
+  server.delete('/comments/:id', { ...deleteCommentSchema, preHandler: ensureAuthenticated }, (request, reply) => {
     const isDeleted = commentsController.delete(request.params.id);
     isDeleted ? reply.code(204).send() : reply.code(404).sendFail({ message: 'Comment not found' });
   });

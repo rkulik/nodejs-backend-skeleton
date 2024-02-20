@@ -1,5 +1,5 @@
 import { posts } from '@modules/posts/schemas/database';
-import { notFoundSchema } from '@src/schemas';
+import { headersSchema, notFoundSchema, unauthorizedSchema } from '@src/schemas';
 import { InferSelectModel } from 'drizzle-orm';
 import { FromSchema } from 'json-schema-to-ts';
 
@@ -21,6 +21,7 @@ const postSchema = {
 
 export const createPostSchema = {
   schema: {
+    headers: headersSchema,
     body: {
       type: 'object',
       properties: {
@@ -47,6 +48,7 @@ export const createPostSchema = {
         required: ['status', 'data'],
         additionalProperties: false,
       },
+      401: unauthorizedSchema,
     },
   },
 } as const;
@@ -113,6 +115,7 @@ export const getPostSchema = {
 
 export const updatePostSchema = {
   schema: {
+    headers: headersSchema,
     params: {
       type: 'object',
       properties: {
@@ -148,6 +151,7 @@ export const updatePostSchema = {
         additionalProperties: false,
       },
       404: notFoundSchema,
+      401: unauthorizedSchema,
     },
   },
 } as const;
@@ -156,6 +160,7 @@ export type UpdatePostDto = FromSchema<typeof updatePostSchema.schema.body>;
 
 export const deletePostSchema = {
   schema: {
+    headers: headersSchema,
     params: {
       type: 'object',
       properties: {
@@ -167,12 +172,14 @@ export const deletePostSchema = {
     response: {
       204: { type: 'null' },
       404: notFoundSchema,
+      401: unauthorizedSchema,
     },
   },
 } as const;
 
 export const publishPostSchema = {
   schema: {
+    headers: headersSchema,
     body: {
       type: 'object',
       properties: {
@@ -199,6 +206,7 @@ export const publishPostSchema = {
         additionalProperties: false,
       },
       404: notFoundSchema,
+      401: unauthorizedSchema,
     },
   },
 } as const;
@@ -207,6 +215,7 @@ export type PublishPostDto = FromSchema<typeof publishPostSchema.schema.body>;
 
 export const unpublishPostSchema = {
   schema: {
+    headers: headersSchema,
     params: {
       type: 'object',
       properties: {
@@ -233,6 +242,7 @@ export const unpublishPostSchema = {
         additionalProperties: false,
       },
       404: notFoundSchema,
+      401: unauthorizedSchema,
     },
   },
 } as const;

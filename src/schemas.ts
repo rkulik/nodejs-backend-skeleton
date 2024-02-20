@@ -46,3 +46,12 @@ export const unauthorizedSchema = {
   required: ['status', 'message'],
   additionalProperties: false,
 };
+
+export const headersSchema = {
+  type: 'object',
+  properties: {
+    authorization: { type: 'string' },
+  },
+  required: ['authorization'],
+  additionalProperties: true,
+};
