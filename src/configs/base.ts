@@ -15,5 +15,9 @@ export const config = {
     password: {
       saltOrRounds: parseInt(process.env.ROUNDS!),
     },
+    token: {
+      secret: process.env.TOKEN_SECRET!,
+      lifetime: parseInt(process.env.TOKEN_LIFETIME!),
+    },
   },
 };

@@ -30,3 +30,19 @@ export const badRequestSchema = {
   required: ['status', 'message'],
   additionalProperties: false,
 };
+
+export const unauthorizedSchema = {
+  type: 'object',
+  properties: {
+    status: { type: 'string' },
+    message: { type: 'string' },
+    code: { type: 'number' },
+    data: {
+      type: 'object',
+      properties: {},
+      additionalProperties: true,
+    },
+  },
+  required: ['status', 'message'],
+  additionalProperties: false,
+};

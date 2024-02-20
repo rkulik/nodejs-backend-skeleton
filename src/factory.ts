@@ -1,8 +1,11 @@
 import { config } from '@configs/base';
+import { CreateAccessTokenAction } from '@modules/auth/actions/create-access-token-action';
 import { ReadUserAction } from '@modules/auth/actions/read-user-action';
 import { RegisterUserAction } from '@modules/auth/actions/register-user-action';
+import { AccessTokensController } from '@modules/auth/controllers/authentications-controller';
 import { RegisteredUsersController } from '@modules/auth/controllers/registered-users-controller';
-import { PasswordHandler } from '@modules/auth/password-handler';
+import { JwtHandler } from '@modules/auth/handlers/jwt-handler';
+import { PasswordHandler } from '@modules/auth/handlers/password-handler';
 import { CreateCommentAction } from '@modules/comments/actions/create-comment-action';
 import { DeleteCommentAction } from '@modules/comments/actions/delete-comment-action';
 import { ReadCommentAction } from '@modules/comments/actions/read-comment-action';
@@ -102,6 +105,22 @@ export class Factory {
 
   public createRegisterUserAction(): RegisterUserAction {
     return new RegisterUserAction(this.createDatabase(), this.createReadUserAction(), this.createPasswordHandler());
+  }
+
+  public createJwtHandler(): JwtHandler {
+    return new JwtHandler({ ...config.auth.token });
+  }
+
+  public createAccessTokensController(): AccessTokensController {
+    return new AccessTokensController(this);
+  }
+
+  public createAccessTokenAction(): CreateAccessTokenAction {
+    return new CreateAccessTokenAction(
+      this.createReadUserAction(),
+      this.createJwtHandler(),
+      this.createPasswordHandler(),
+    );
   }
 
   public createDatabase(): Database {

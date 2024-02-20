@@ -1,5 +1,5 @@
 import { ReadUserAction } from '@modules/auth/actions/read-user-action';
-import { PasswordHandler } from '@modules/auth/password-handler';
+import { PasswordHandler } from '@modules/auth/handlers/password-handler';
 import { RegisterUserDto, User } from '@modules/auth/schemas/base';
 import { users } from '@modules/auth/schemas/database';
 import { Action, Database } from '@src/types';
