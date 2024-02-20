@@ -1,4 +1,8 @@
 import { config } from '@configs/base';
+import { ReadUserAction } from '@modules/auth/actions/read-user-action';
+import { RegisterUserAction } from '@modules/auth/actions/register-user-action';
+import { RegisteredUsersController } from '@modules/auth/controllers/registered-users-controller';
+import { PasswordHandler } from '@modules/auth/password-handler';
 import { CreateCommentAction } from '@modules/comments/actions/create-comment-action';
 import { DeleteCommentAction } from '@modules/comments/actions/delete-comment-action';
 import { ReadCommentAction } from '@modules/comments/actions/read-comment-action';
@@ -82,6 +86,22 @@ export class Factory {
 
   public createReadPostCommentsAction(): ReadPostCommentsAction {
     return new ReadPostCommentsAction(this.createDatabase(), this.createReadPostAction());
+  }
+
+  public createRegisteredUsersController(): RegisteredUsersController {
+    return new RegisteredUsersController(this);
+  }
+
+  public createReadUserAction(): ReadUserAction {
+    return new ReadUserAction(this.createDatabase());
+  }
+
+  public createPasswordHandler(): PasswordHandler {
+    return new PasswordHandler({ ...config.auth.password });
+  }
+
+  public createRegisterUserAction(): RegisterUserAction {
+    return new RegisterUserAction(this.createDatabase(), this.createReadUserAction(), this.createPasswordHandler());
   }
 
   public createDatabase(): Database {

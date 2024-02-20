@@ -11,4 +11,9 @@ export const config = {
   database: {
     url: process.env.DATABASE_URL!,
   },
+  auth: {
+    password: {
+      saltOrRounds: parseInt(process.env.ROUNDS!),
+    },
+  },
 };

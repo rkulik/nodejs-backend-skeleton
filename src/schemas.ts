@@ -14,3 +14,19 @@ export const notFoundSchema = {
   required: ['status', 'data'],
   additionalProperties: false,
 };
+
+export const badRequestSchema = {
+  type: 'object',
+  properties: {
+    status: { type: 'string' },
+    message: { type: 'string' },
+    code: { type: 'number' },
+    data: {
+      type: 'object',
+      properties: {},
+      additionalProperties: true,
+    },
+  },
+  required: ['status', 'message'],
+  additionalProperties: false,
+};
