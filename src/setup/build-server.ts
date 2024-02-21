@@ -4,6 +4,7 @@ import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
 import parseToken from '@modules/auth/hooks/parse-token';
 import { errorHandler } from '@setup/error-handler';
+import { notFoundHandler } from '@setup/not-found-handler';
 import factory from '@setup/plugins/factory';
 import jsend from '@setup/plugins/jsend';
 import fastify, { FastifyInstance } from 'fastify';
@@ -32,5 +33,6 @@ export const buildServer = (): FastifyInstance => {
       dirNameRoutePrefix: false,
     })
     .setErrorHandler(errorHandler)
+    .setNotFoundHandler(notFoundHandler)
     .addHook('onRequest', parseToken);
 };
