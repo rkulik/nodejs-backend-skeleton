@@ -3,6 +3,7 @@ import autload from '@fastify/autoload';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
 import parseToken from '@modules/auth/hooks/parse-token';
+import { errorHandler } from '@setup/error-handler';
 import factory from '@setup/plugins/factory';
 import jsend from '@setup/plugins/jsend';
 import fastify, { FastifyInstance } from 'fastify';
@@ -30,5 +31,6 @@ export const buildServer = (): FastifyInstance => {
       options: { prefix: config.server.apiPrefix },
       dirNameRoutePrefix: false,
     })
+    .setErrorHandler(errorHandler)
     .addHook('onRequest', parseToken);
 };
