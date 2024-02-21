@@ -31,7 +31,7 @@ export const createCommentSchema = {
       additionalProperties: false,
     },
     response: {
-      200: {
+      201: {
         type: 'object',
         properties: {
           status: { type: 'string' },

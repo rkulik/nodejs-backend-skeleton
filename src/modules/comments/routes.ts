@@ -14,7 +14,7 @@ const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) =
 
   server.post('/comments', { ...createCommentSchema, preHandler: ensureAuthenticated }, (request, reply) => {
     const comment = commentsController.create(request.body);
-    comment ? reply.sendSuccess({ comment }) : reply.code(404).sendFail({ message: 'Post not found' });
+    comment ? reply.code(201).sendSuccess({ comment }) : reply.code(404).sendFail({ message: 'Post not found' });
   });
 
   server.get('/posts/:id/comments', getPostCommentsSchema, (request, reply) => {

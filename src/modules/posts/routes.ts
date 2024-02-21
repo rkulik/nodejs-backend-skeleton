@@ -15,7 +15,7 @@ const posts: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
   const publishedPostsController = server.factory.createPublishedPostsController();
 
   server.post('/posts', { ...createPostSchema, preHandler: ensureAuthenticated }, (request, reply) => {
-    reply.sendSuccess({ post: postsController.create(request.body) });
+    reply.code(201).sendSuccess({ post: postsController.create(request.body) });
   });
 
   server.get('/posts', getPostsSchema, (_request, reply) => {

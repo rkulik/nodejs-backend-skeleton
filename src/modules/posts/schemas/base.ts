@@ -32,7 +32,7 @@ export const createPostSchema = {
       additionalProperties: false,
     },
     response: {
-      200: {
+      201: {
         type: 'object',
         properties: {
           status: { type: 'string' },

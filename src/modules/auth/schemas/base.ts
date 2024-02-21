@@ -18,7 +18,7 @@ export const registerUserSchema = {
       additionalProperties: false,
     },
     response: {
-      200: {
+      201: {
         type: 'object',
         properties: {
           status: { type: 'string' },

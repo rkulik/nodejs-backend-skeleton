@@ -7,7 +7,9 @@ const auth: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
 
   server.post('/auth/register', registerUserSchema, async (request, reply) => {
     const registeredUser = await registeredUsersController.create(request.body);
-    registeredUser ? reply.sendSuccess({ user: registeredUser }) : reply.code(400).sendError('Registration failed');
+    registeredUser
+      ? reply.code(201).sendSuccess({ user: registeredUser })
+      : reply.code(400).sendError('Registration failed');
   });
 
   server.post('/auth/login', loginUserSchema, async (request, reply) => {
