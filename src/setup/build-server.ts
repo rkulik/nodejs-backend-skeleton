@@ -4,6 +4,7 @@ import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
 import parseToken from '@modules/auth/hooks/parse-token';
 import { errorHandler } from '@setup/error-handler';
+import { migrateIfNeeded } from '@setup/hooks/migrate-if-needed';
 import { notFoundHandler } from '@setup/not-found-handler';
 import factory from '@setup/plugins/factory';
 import jsend from '@setup/plugins/jsend';
@@ -34,5 +35,6 @@ export const buildServer = (): FastifyInstance => {
     })
     .setErrorHandler(errorHandler)
     .setNotFoundHandler(notFoundHandler)
-    .addHook('onRequest', parseToken);
+    .addHook('onRequest', parseToken)
+    .addHook('onReady', migrateIfNeeded);
 };
