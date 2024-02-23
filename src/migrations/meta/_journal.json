@@ -5,36 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1707073524471,
-      "tag": "0000_mysterious_lake",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1707689931224,
-      "tag": "0001_panoramic_nomad",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1707691314735,
-      "tag": "0002_wooden_frog_thor",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1707777578663,
-      "tag": "0003_equal_flatman",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1708445674811,
-      "tag": "0004_open_ser_duncan",
+      "when": 1708724335760,
+      "tag": "0000_complex_polaris",
       "breakpoints": true
     }
   ]

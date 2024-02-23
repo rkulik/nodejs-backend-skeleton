@@ -4,8 +4,8 @@ import { Factory } from '@src/factory';
 export class PostsController {
   public constructor(private factory: Factory) {}
 
-  public create(createPostDto: CreatePostDto): Post {
-    return this.factory.createCreatePostAction().execute(createPostDto);
+  public create(createPostDto: CreatePostDto, userId: number): Post {
+    return this.factory.createCreatePostAction().execute(createPostDto, userId);
   }
 
   public read(): Post[] {
