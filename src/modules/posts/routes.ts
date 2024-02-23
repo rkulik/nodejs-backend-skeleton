@@ -1,5 +1,6 @@
 import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 import { ensureAuthenticated } from '@modules/auth/hooks/ensure-authenticated';
+import { checkPostExistenceAndOwnership } from '@modules/posts/hooks/check-post-existence-and-ownership';
 import {
   createPostSchema,
   deletePostSchema,
@@ -27,26 +28,38 @@ const posts: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
     post ? reply.sendSuccess({ post }) : reply.code(404).sendFail({ message: 'Post not found' });
   });
 
-  server.put('/posts/:id', { ...updatePostSchema, preHandler: ensureAuthenticated }, (request, reply) => {
-    const updatedPost = postsController.update(request.params.id, request.body);
-    updatedPost ? reply.sendSuccess({ post: updatedPost }) : reply.code(404).sendFail({ message: 'Post not found' });
-  });
+  server.put(
+    '/posts/:id',
+    { ...updatePostSchema, preHandler: [ensureAuthenticated, checkPostExistenceAndOwnership] },
+    (request, reply) => {
+      const updatedPost = postsController.update(request.params.id, request.body);
+      updatedPost ? reply.sendSuccess({ post: updatedPost }) : reply.code(404).sendFail({ message: 'Post not found' });
+    },
+  );
 
-  server.delete('/posts/:id', { ...deletePostSchema, preHandler: ensureAuthenticated }, (request, reply) => {
-    const isDeleted = postsController.delete(request.params.id);
-    isDeleted ? reply.code(204).send() : reply.code(404).sendFail({ message: 'Post not found' });
-  });
+  server.delete(
+    '/posts/:id',
+    { ...deletePostSchema, preHandler: [ensureAuthenticated, checkPostExistenceAndOwnership] },
+    (request, reply) => {
+      const isDeleted = postsController.delete(request.params.id);
+      isDeleted ? reply.code(204).send() : reply.code(404).sendFail({ message: 'Post not found' });
+    },
+  );
 
-  server.post('/published-posts', { ...publishPostSchema, preHandler: ensureAuthenticated }, (request, reply) => {
-    const publishedPost = publishedPostsController.create(request.body);
-    publishedPost
-      ? reply.sendSuccess({ post: publishedPost })
-      : reply.code(404).sendFail({ message: 'Post not found' });
-  });
+  server.post(
+    '/published-posts',
+    { ...publishPostSchema, preHandler: [ensureAuthenticated, checkPostExistenceAndOwnership] },
+    (request, reply) => {
+      const publishedPost = publishedPostsController.create(request.body);
+      publishedPost
+        ? reply.sendSuccess({ post: publishedPost })
+        : reply.code(404).sendFail({ message: 'Post not found' });
+    },
+  );
 
   server.delete(
     '/published-posts/:id',
-    { ...unpublishPostSchema, preHandler: ensureAuthenticated },
+    { ...unpublishPostSchema, preHandler: [ensureAuthenticated, checkPostExistenceAndOwnership] },
     (request, reply) => {
       const unpublishedPost = publishedPostsController.delete(request.params.id);
       unpublishedPost
