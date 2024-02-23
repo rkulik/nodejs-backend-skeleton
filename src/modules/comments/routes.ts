@@ -1,5 +1,5 @@
 import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
-import ensureAuthenticated from '@modules/auth/hooks/ensure-authenticated';
+import { ensureAuthenticated } from '@modules/auth/hooks/ensure-authenticated';
 import {
   createCommentSchema,
   deleteCommentSchema,

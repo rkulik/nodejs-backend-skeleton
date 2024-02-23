@@ -6,7 +6,7 @@ const isValidFastifyRequest = (potentialRequest: any): potentialRequest is Fasti
 };
 
 // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
-const parseToken = function (
+export const parseToken = function (
   this: FastifyInstance,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   request: FastifyRequest<Record<string, unknown>, any, any, any>,
@@ -25,6 +25,3 @@ const parseToken = function (
 
   done();
 };
-
-// eslint-disable-next-line import/no-default-export
-export default parseToken;

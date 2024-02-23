@@ -2,7 +2,7 @@ import { config } from '@configs/base';
 import autload from '@fastify/autoload';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
-import parseToken from '@modules/auth/hooks/parse-token';
+import { parseToken } from '@modules/auth/hooks/parse-token';
 import { errorHandler } from '@setup/handlers/error-handler';
 import { notFoundHandler } from '@setup/handlers/not-found-handler';
 import { migrateIfNeeded } from '@setup/hooks/migrate-if-needed';

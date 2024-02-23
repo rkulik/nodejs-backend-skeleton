@@ -5,7 +5,7 @@ const isValidFastifyReply = (potentialReply: any): potentialReply is FastifyRepl
   return typeof potentialReply.code === 'function' && typeof potentialReply.sendError === 'function';
 };
 
-const ensureAuthenticated = (
+export const ensureAuthenticated = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   request: FastifyRequest<Record<string, unknown>, any, any, any>,
   reply: FastifyReply,
@@ -22,6 +22,3 @@ const ensureAuthenticated = (
 
   done();
 };
-
-// eslint-disable-next-line import/no-default-export
-export default ensureAuthenticated;
