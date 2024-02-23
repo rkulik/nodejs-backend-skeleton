@@ -6,3 +6,10 @@ export type Action<T = void> = {
 };
 
 export type Database = BetterSQLite3Database;
+
+export type TokenPayload = {
+  user: {
+    id: number;
+    name: string;
+  };
+};

@@ -23,7 +23,7 @@ import { UpdatePostAction } from '@modules/posts/actions/update-post-action';
 import { PostsController } from '@modules/posts/controllers/posts-controller';
 import { PublishedPostsController } from '@modules/posts/controllers/published-posts-controller';
 import { SqliteDatabase } from '@src/sqlite-database';
-import { Database } from '@src/types';
+import { Database, TokenPayload } from '@src/types';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 
 export class Factory {
@@ -107,8 +107,8 @@ export class Factory {
     return new RegisterUserAction(this.createDatabase(), this.createReadUserAction(), this.createPasswordHandler());
   }
 
-  public createJwtHandler(): JwtHandler {
-    return new JwtHandler({ ...config.auth.token });
+  public createJwtHandler(): JwtHandler<TokenPayload> {
+    return new JwtHandler<TokenPayload>({ ...config.auth.token });
   }
 
   public createAccessTokensController(): AccessTokensController {

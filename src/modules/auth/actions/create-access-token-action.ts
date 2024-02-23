@@ -2,12 +2,12 @@ import { ReadUserAction } from '@modules/auth/actions/read-user-action';
 import { JwtHandler } from '@modules/auth/handlers/jwt-handler';
 import { PasswordHandler } from '@modules/auth/handlers/password-handler';
 import { LoginUserDto } from '@modules/auth/schemas/base';
-import { Action } from '@src/types';
+import { Action, TokenPayload } from '@src/types';
 
 export class CreateAccessTokenAction implements Action<Promise<string | undefined>> {
   public constructor(
     private readUserAction: ReadUserAction,
-    private jwtHandler: JwtHandler,
+    private jwtHandler: JwtHandler<TokenPayload>,
     private passwordHandler: PasswordHandler,
   ) {}
 
@@ -22,8 +22,10 @@ export class CreateAccessTokenAction implements Action<Promise<string | undefine
     }
 
     return this.jwtHandler.sign({
-      id: existingUser.id,
-      name: existingUser.name,
+      user: {
+        id: existingUser.id,
+        name: existingUser.name,
+      },
     });
   }
 }

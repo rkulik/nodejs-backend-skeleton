@@ -5,18 +5,18 @@ type Config = {
   lifetime?: number;
 };
 
-export class JwtHandler {
+export class JwtHandler<T extends Record<string, unknown>> {
   public constructor(private config: Config) {}
 
-  public sign(payload: Record<string, unknown>): string {
+  public sign(payload: T): string {
     const { secret, lifetime } = this.config;
 
     return jwt.sign(payload, secret, lifetime ? { expiresIn: lifetime } : undefined);
   }
 
-  public verify(token: string): string | JwtPayload | undefined {
+  public verify<T>(token: string): (T & JwtPayload) | undefined {
     try {
-      return jwt.verify(token, this.config.secret);
+      return jwt.verify(token, this.config.secret) as T & JwtPayload;
     } catch {
       return undefined;
     }
