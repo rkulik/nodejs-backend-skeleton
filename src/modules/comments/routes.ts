@@ -1,5 +1,6 @@
 import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 import { ensureAuthenticated } from '@modules/auth/hooks/ensure-authenticated';
+import { checkCommentExistenceAndOwnership } from '@modules/comments/hooks/check-comment-existence-and-ownership';
 import {
   createCommentSchema,
   deleteCommentSchema,
@@ -27,17 +28,25 @@ const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) =
     comment ? reply.sendSuccess({ comment }) : reply.code(404).sendFail({ message: 'Comment not found' });
   });
 
-  server.put('/comments/:id', { ...updateCommentSchema, preHandler: ensureAuthenticated }, (request, reply) => {
-    const updatedComment = commentsController.update(request.params.id, request.body);
-    updatedComment
-      ? reply.sendSuccess({ comment: updatedComment })
-      : reply.code(404).sendFail({ message: 'Comment not found' });
-  });
+  server.put(
+    '/comments/:id',
+    { ...updateCommentSchema, preHandler: [ensureAuthenticated, checkCommentExistenceAndOwnership] },
+    (request, reply) => {
+      const updatedComment = commentsController.update(request.params.id, request.body);
+      updatedComment
+        ? reply.sendSuccess({ comment: updatedComment })
+        : reply.code(404).sendFail({ message: 'Comment not found' });
+    },
+  );
 
-  server.delete('/comments/:id', { ...deleteCommentSchema, preHandler: ensureAuthenticated }, (request, reply) => {
-    const isDeleted = commentsController.delete(request.params.id);
-    isDeleted ? reply.code(204).send() : reply.code(404).sendFail({ message: 'Comment not found' });
-  });
+  server.delete(
+    '/comments/:id',
+    { ...deleteCommentSchema, preHandler: [ensureAuthenticated, checkCommentExistenceAndOwnership] },
+    (request, reply) => {
+      const isDeleted = commentsController.delete(request.params.id);
+      isDeleted ? reply.code(204).send() : reply.code(404).sendFail({ message: 'Comment not found' });
+    },
+  );
 
   done();
 };
