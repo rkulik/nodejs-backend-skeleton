@@ -9,7 +9,7 @@ export class CreateCommentAction implements Action<Comment | undefined> {
     private readPostAction: ReadPostAction,
   ) {}
 
-  public execute(createCommentDto: CreateCommentDto): Comment | undefined {
+  public execute(createCommentDto: CreateCommentDto, userId: number): Comment | undefined {
     const existingPost = this.readPostAction.execute(createCommentDto.postId);
     if (!existingPost) {
       return undefined;
@@ -19,6 +19,7 @@ export class CreateCommentAction implements Action<Comment | undefined> {
       .insert(comments)
       .values({
         ...createCommentDto,
+        userId,
         createdAt: new Date(),
       })
       .returning()

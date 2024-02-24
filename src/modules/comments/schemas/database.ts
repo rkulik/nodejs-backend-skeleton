@@ -1,3 +1,4 @@
+import { users } from '@modules/auth/schemas/database';
 import { posts } from '@modules/posts/schemas/database';
 import { sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
@@ -8,6 +9,14 @@ export const comments = sqliteTable('comments', {
     .references(
       () => {
         return posts.id;
+      },
+      { onDelete: 'cascade' },
+    )
+    .notNull(),
+  userId: integer('user_id')
+    .references(
+      () => {
+        return users.id;
       },
       { onDelete: 'cascade' },
     )

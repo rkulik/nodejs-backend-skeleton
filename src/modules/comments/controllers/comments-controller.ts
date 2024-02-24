@@ -4,8 +4,8 @@ import { Factory } from '@src/factory';
 export class CommentsController {
   public constructor(private factory: Factory) {}
 
-  public create(createCommentDto: CreateCommentDto): Comment | undefined {
-    return this.factory.createCreateCommentAction().execute(createCommentDto);
+  public create(createCommentDto: CreateCommentDto, userId: number): Comment | undefined {
+    return this.factory.createCreateCommentAction().execute(createCommentDto, userId);
   }
 
   public readOne(id: number): Comment | undefined {
