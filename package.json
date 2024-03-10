@@ -22,7 +22,8 @@
     "migrate:generate": "drizzle-kit generate:sqlite --config=src/configs/drizzle.ts",
     "migrate:push": "drizzle-kit push:sqlite --config=src/configs/drizzle.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky"
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
   },
   "dependencies": {
     "@fastify/autoload": "5.8.0",
@@ -39,6 +40,8 @@
     "jsonwebtoken": "9.0.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "19.0.3",
+    "@commitlint/config-conventional": "19.0.3",
     "@types/bcrypt": "5.0.2",
     "@types/better-sqlite3": "7.6.9",
     "@types/jsonwebtoken": "9.0.5",
