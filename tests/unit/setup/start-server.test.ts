@@ -1,6 +1,5 @@
+import { startServer } from '@setup/start-server';
 import fastify, { FastifyInstance, FastifyListenOptions } from 'fastify';
-
-import { startServer } from '../../../src/setup/start-server';
 
 jest.mock('fastify', () => {
   return {
