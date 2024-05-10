@@ -9,10 +9,10 @@
     "url": "https://www.kulik.io/"
   },
   "license": "MIT",
-  "packageManager": "pnpm@8.9.0",
+  "packageManager": "pnpm@9.0.4",
   "engines": {
     "node": "20.x",
-    "pnpm": "8.x"
+    "pnpm": "9.x"
   },
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias --project tsconfig.json",
