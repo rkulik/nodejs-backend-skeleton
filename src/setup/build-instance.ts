@@ -12,7 +12,7 @@ import fastify, { FastifyInstance } from 'fastify';
 
 import path from 'path';
 
-export const buildServer = (): FastifyInstance => {
+export const buildInstance = (): FastifyInstance => {
   return fastify()
     .register(factory)
     .register(jsend)

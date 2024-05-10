@@ -1,5 +1,5 @@
 import { config } from '@configs/base';
-import { buildServer } from '@setup/build-server';
+import { buildInstance } from '@setup/build-instance';
 import { startServer } from '@setup/start-server';
 
 const main = async (): Promise<void> => {
@@ -7,7 +7,7 @@ const main = async (): Promise<void> => {
     server: { port, host },
   } = config;
 
-  await startServer(buildServer(), { port, host });
+  await startServer(buildInstance(), { port, host });
 };
 
 main();
