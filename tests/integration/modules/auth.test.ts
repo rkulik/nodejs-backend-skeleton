@@ -1,17 +1,7 @@
 import { buildInstance } from '@setup/build-instance';
-import supertest from 'supertest';
-
-const AUTH_API = '/api/v1/auth';
+import { loginUser, registerUser } from '@tests/utils/auth';
 
 const instance = buildInstance();
-
-const registerUser = (body: Record<string, unknown>): Promise<supertest.Response> => {
-  return supertest(instance.server).post(`${AUTH_API}/register`).send(body);
-};
-
-const loginUser = (body: Record<string, unknown>): Promise<supertest.Response> => {
-  return supertest(instance.server).post(`${AUTH_API}/login`).send(body);
-};
 
 describe('auth', () => {
   beforeAll(async () => {
@@ -23,7 +13,7 @@ describe('auth', () => {
   });
 
   it('should register a new user', async () => {
-    const response = await registerUser({ name: 'John', email: 'john@doe.com', password: 'pw' });
+    const response = await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(201);
@@ -40,8 +30,8 @@ describe('auth', () => {
   });
 
   it('should fail registration if email is already taken', async () => {
-    await registerUser({ name: 'John', email: 'john@doe.com', password: 'pw' });
-    const response = await registerUser({ name: 'John', email: 'john@doe.com', password: 'pw' });
+    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
+    const response = await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(400);
@@ -52,8 +42,8 @@ describe('auth', () => {
   });
 
   it('should login an user', async () => {
-    await registerUser({ name: 'John', email: 'john@doe.com', password: 'pw' });
-    const response = await loginUser({ email: 'john@doe.com', password: 'pw' });
+    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
+    const response = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(200);
@@ -62,7 +52,7 @@ describe('auth', () => {
   });
 
   it('should fail login if invalid credentials were provided', async () => {
-    const response = await loginUser({ email: 'john@doe.com', password: 'pw' });
+    const response = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(401);
