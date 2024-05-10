@@ -10,6 +10,9 @@
   "roots": [
     "<rootDir>/tests"
   ],
+  "setupFilesAfterEnv": [
+    "<rootDir>/setup-jest.ts"
+  ],
   "testEnvironment": "node",
   "transform": {
     "^.+\\.tsx?$": "ts-jest"

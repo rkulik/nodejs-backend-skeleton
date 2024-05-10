@@ -21,7 +21,7 @@
     "lint": "eslint src --ext .ts",
     "migrate:generate": "drizzle-kit generate:sqlite --config=src/configs/drizzle.ts",
     "migrate:push": "drizzle-kit push:sqlite --config=src/configs/drizzle.ts",
-    "test": "jest",
+    "test": "NODE_ENV=testing jest",
     "prepare": "husky",
     "commitlint": "commitlint --edit"
   },
