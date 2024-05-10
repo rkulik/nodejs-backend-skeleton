@@ -1,6 +1,8 @@
 import { buildInstance } from '@setup/build-instance';
 import supertest from 'supertest';
 
+const HEALTH_API = '/api/v1/health';
+
 const instance = buildInstance();
 
 describe('health', () => {
@@ -14,7 +16,7 @@ describe('health', () => {
 
   it('should respond with health information', () => {
     supertest(instance.server)
-      .get('/api/v1/health')
+      .get(HEALTH_API)
       .expect(200)
       .expect('Content-Type', 'application/json; charset=utf-8')
       .expect({
