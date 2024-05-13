@@ -1,5 +1,5 @@
 import { buildInstance } from '@setup/build-instance';
-import { loginUser, registerUser } from '@tests/utils/auth';
+import { initializeUser } from '@tests/utils/auth';
 import { createPost, deletePost, getPost, getPosts, publishPost, unpublishPost, updatePost } from '@tests/utils/posts';
 
 const instance = buildInstance();
@@ -14,8 +14,7 @@ describe('posts', () => {
   });
 
   it('should create a post', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
 
     const response = await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
@@ -52,8 +51,7 @@ describe('posts', () => {
   });
 
   it('should get a specific post', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -103,8 +101,7 @@ describe('posts', () => {
   });
 
   it('should update a post', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -131,8 +128,7 @@ describe('posts', () => {
   });
 
   it('should not update a post if not authenticated', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -152,14 +148,16 @@ describe('posts', () => {
   });
 
   it('should not update a post if not the owner', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
     });
-    await registerUser(instance.server, { name: 'Jane', email: 'jane@doe.com', password: 'pw' });
-    const otherUserResponse = await loginUser(instance.server, { email: 'jane@doe.com', password: 'pw' });
+    const otherUserResponse = await initializeUser(instance.server, {
+      name: 'Jane',
+      email: 'jane@doe.com',
+      password: 'pw',
+    });
 
     const response = await updatePost(instance.server, otherUserResponse.body.data.accessToken, 1, {
       title: 'Some updated title',
@@ -175,8 +173,7 @@ describe('posts', () => {
   });
 
   it('should not update a post if post does not exist', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -198,8 +195,7 @@ describe('posts', () => {
   });
 
   it('should delete a post', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -212,8 +208,7 @@ describe('posts', () => {
   });
 
   it('should not delete a post if not authenticated', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -230,14 +225,16 @@ describe('posts', () => {
   });
 
   it('should not delete a post if not the owner', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
     });
-    await registerUser(instance.server, { name: 'Jane', email: 'jane@doe.com', password: 'pw' });
-    const otherUserResponse = await loginUser(instance.server, { email: 'jane@doe.com', password: 'pw' });
+    const otherUserResponse = await initializeUser(instance.server, {
+      name: 'Jane',
+      email: 'jane@doe.com',
+      password: 'pw',
+    });
 
     const response = await deletePost(instance.server, otherUserResponse.body.data.accessToken, 1);
 
@@ -250,8 +247,7 @@ describe('posts', () => {
   });
 
   it('should not delete a post if post does not exist', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -270,8 +266,7 @@ describe('posts', () => {
   });
 
   it('should publish a post', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -285,8 +280,7 @@ describe('posts', () => {
   });
 
   it('should not publish a post if not authenticated', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -303,14 +297,16 @@ describe('posts', () => {
   });
 
   it('should not publish a post if not the owner', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
     });
-    await registerUser(instance.server, { name: 'Jane', email: 'jane@doe.com', password: 'pw' });
-    const otherUserResponse = await loginUser(instance.server, { email: 'jane@doe.com', password: 'pw' });
+    const otherUserResponse = await initializeUser(instance.server, {
+      name: 'Jane',
+      email: 'jane@doe.com',
+      password: 'pw',
+    });
 
     const response = await publishPost(instance.server, otherUserResponse.body.data.accessToken, { id: 1 });
 
@@ -323,8 +319,7 @@ describe('posts', () => {
   });
 
   it('should not publish a post if post does not exist', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -343,8 +338,7 @@ describe('posts', () => {
   });
 
   it('should unpublish a post', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -359,8 +353,7 @@ describe('posts', () => {
   });
 
   it('should not unpublish a post if not authenticated', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
@@ -378,15 +371,17 @@ describe('posts', () => {
   });
 
   it('should not unpublish a post if not the owner', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',
     });
     await publishPost(instance.server, userResponse.body.data.accessToken, { id: 1 });
-    await registerUser(instance.server, { name: 'Jane', email: 'jane@doe.com', password: 'pw' });
-    const otherUserResponse = await loginUser(instance.server, { email: 'jane@doe.com', password: 'pw' });
+    const otherUserResponse = await initializeUser(instance.server, {
+      name: 'Jane',
+      email: 'jane@doe.com',
+      password: 'pw',
+    });
 
     const response = await unpublishPost(instance.server, otherUserResponse.body.data.accessToken, 1);
 
@@ -399,8 +394,7 @@ describe('posts', () => {
   });
 
   it('should not unpublish a post if post does not exist', async () => {
-    await registerUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
-    const userResponse = await loginUser(instance.server, { email: 'john@doe.com', password: 'pw' });
+    const userResponse = await initializeUser(instance.server, { name: 'John', email: 'john@doe.com', password: 'pw' });
     await createPost(instance.server, userResponse.body.data.accessToken, {
       title: 'Some title',
       content: 'Some content',

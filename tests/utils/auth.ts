@@ -11,3 +11,9 @@ export const registerUser = (server: RawServerDefault, body: RegisterUserDto): P
 export const loginUser = (server: RawServerDefault, body: LoginUserDto): Promise<Response> => {
   return supertest(server).post(`${AUTH_API}/login`).send(body);
 };
+
+export const initializeUser = async (server: RawServerDefault, registerUserDto: RegisterUserDto): Promise<Response> => {
+  await registerUser(server, registerUserDto);
+
+  return loginUser(server, { email: registerUserDto.email, password: registerUserDto.password });
+};
