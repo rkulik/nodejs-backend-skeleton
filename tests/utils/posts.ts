@@ -2,7 +2,7 @@ import { CreatePostDto, PublishPostDto, UpdatePostDto } from '@modules/posts/sch
 import { RawServerDefault } from 'fastify';
 import supertest, { Response } from 'supertest';
 
-const POSTS_API = '/api/v1/posts';
+export const POSTS_API = '/api/v1/posts';
 const PUBLISHED_POSTS_API = '/api/v1/published-posts';
 
 export const createPost = (server: RawServerDefault, accessToken: string, body: CreatePostDto): Promise<Response> => {
