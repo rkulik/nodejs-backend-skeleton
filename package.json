@@ -2,7 +2,10 @@
   "name": "nodejs-backend-skeleton",
   "version": "1.0.0",
   "description": "Node.js backend skeleton",
-  "keywords": [],
+  "keywords": [
+    "nodejs",
+    "api"
+  ],
   "author": {
     "name": "René Kulik",
     "email": "rene@kulik.io",
