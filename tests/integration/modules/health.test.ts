@@ -4,6 +4,7 @@ import supertest from 'supertest';
 const HEALTH_API = '/api/v1/health';
 
 const instance = buildInstance();
+const server = instance.server;
 
 describe('health', () => {
   beforeAll(async () => {
@@ -15,7 +16,7 @@ describe('health', () => {
   });
 
   it('should respond with health information', () => {
-    supertest(instance.server)
+    supertest(server)
       .get(HEALTH_API)
       .expect(200)
       .expect('Content-Type', 'application/json; charset=utf-8')
