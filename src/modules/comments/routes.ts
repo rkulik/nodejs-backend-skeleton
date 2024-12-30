@@ -23,7 +23,7 @@ const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) =
   });
 
   server.get('/posts/:id/comments', getPostCommentsSchema, (request, reply) => {
-    const comments = postCommentsController.read(request.params.id);
+    const comments = postCommentsController.readAll(request.params.id);
     if (comments) {
       reply.sendSuccess({ comments });
     } else {
@@ -32,7 +32,7 @@ const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) =
   });
 
   server.get('/comments/:id', getCommentSchema, (request, reply) => {
-    const comment = commentsController.readOne(request.params.id);
+    const comment = commentsController.read(request.params.id);
     if (comment) {
       reply.sendSuccess({ comment });
     } else {

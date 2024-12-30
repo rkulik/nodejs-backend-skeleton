@@ -20,11 +20,11 @@ const posts: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
   });
 
   server.get('/posts', getPostsSchema, (_request, reply) => {
-    reply.sendSuccess({ posts: postsController.read() });
+    reply.sendSuccess({ posts: postsController.readAll() });
   });
 
   server.get('/posts/:id', getPostSchema, (request, reply) => {
-    const post = postsController.readOne(request.params.id);
+    const post = postsController.read(request.params.id);
     if (post) {
       reply.sendSuccess({ post });
     } else {

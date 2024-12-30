@@ -30,7 +30,7 @@ export const checkPostExistenceAndOwnership = function (
     return;
   }
 
-  const existingPost = this.factory.createPostsController().readOne(id);
+  const existingPost = this.factory.createPostsController().read(id);
   if (!existingPost) {
     reply.code(404).sendFail({ message: 'Post not found' });
     done();

@@ -30,7 +30,7 @@ export const checkCommentExistenceAndOwnership = function (
     return;
   }
 
-  const existingComment = this.factory.createCommentsController().readOne(id);
+  const existingComment = this.factory.createCommentsController().read(id);
   if (!existingComment) {
     reply.code(404).sendFail({ message: 'Comment not found' });
     done();

@@ -8,12 +8,12 @@ export class PostsController {
     return this.factory.createCreatePostAction().execute(createPostDto, userId);
   }
 
-  public read(): Post[] {
-    return this.factory.createReadPostsAction().execute();
+  public read(id: number): Post | undefined {
+    return this.factory.createReadPostAction().execute(id);
   }
 
-  public readOne(id: number): Post | undefined {
-    return this.factory.createReadPostAction().execute(id);
+  public readAll(): Post[] {
+    return this.factory.createReadPostsAction().execute();
   }
 
   public update(id: number, updatePostDto: UpdatePostDto): Post | undefined {

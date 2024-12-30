@@ -8,7 +8,7 @@ export class CommentsController {
     return this.factory.createCreateCommentAction().execute(createCommentDto, userId);
   }
 
-  public readOne(id: number): Comment | undefined {
+  public read(id: number): Comment | undefined {
     return this.factory.createReadCommentAction().execute(id);
   }
 
