@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "packageManager": "pnpm@9.15.2",
   "description": "Node.js backend skeleton",
-  "author": {
-    "name": "René Kulik",
-    "email": "rene@kulik.io",
-    "url": "https://www.kulik.io/"
-  },
+  "author": "René Kulik <rene@kulik.io> (https://www.kulik.io)",
   "license": "MIT",
   "keywords": [
     "nodejs",
