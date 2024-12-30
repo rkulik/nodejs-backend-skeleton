@@ -1,11 +1,12 @@
+import { config as baseConfig } from '@configs/base';
 import type { Config } from 'drizzle-kit';
 
 const config: Config = {
   schema: 'src/modules/*/schemas/database.ts',
-  out: 'src/migrations',
+  out: baseConfig.database.migrationsFolder,
   driver: 'better-sqlite',
   dbCredentials: {
-    url: 'sqlite.db',
+    url: baseConfig.database.url,
   },
 };
 
