@@ -1,50 +1,36 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "baseUrl": ".",
-    "esModuleInterop": true,
-    "exactOptionalPropertyTypes": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
     "module": "NodeNext",
+    "rootDir": "src",
     "moduleResolution": "NodeNext",
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noUncheckedIndexedAccess": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "outDir": "dist",
+    "baseUrl": ".",
     "paths": {
-      "@configs/*": [
-        "./src/configs/*"
-      ],
-      "@modules/*": [
-        "./src/modules/*"
-      ],
-      "@setup/*": [
-        "./src/setup/*"
-      ],
-      "@src/*": [
-        "./src/*"
-      ],
-      "@tests/*": [
-        "./tests/*"
-      ]
+      "@configs/*": ["./src/configs/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@setup/*": ["./src/setup/*"],
+      "@src/*": ["./src/*"],
+      "@tests/*": ["./tests/*"],
     },
     "resolveJsonModule": true,
-    "rootDir": "src",
-    "skipLibCheck": true,
+    "outDir": "dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "target": "ESNext",
-    "useDefineForClassFields": true
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "skipLibCheck": true,
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "src/**/*.ts"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"],
 }
