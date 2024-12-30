@@ -10,8 +10,8 @@ export class ReadPostCommentsAction implements Action<Comment[] | undefined> {
     private readPostAction: ReadPostAction,
   ) {}
 
-  public execute(id: number): Comment[] | undefined {
-    const existingPost = this.readPostAction.execute(id);
+  public execute(postId: number): Comment[] | undefined {
+    const existingPost = this.readPostAction.execute(postId);
     if (!existingPost) {
       return undefined;
     }
