@@ -39,7 +39,7 @@ Create a `.env` file:
 cp .env.example .env
 ```
 
-Start the development server: 
+Start the development server:
 
 ```bash
 pnpm run dev
@@ -59,3 +59,7 @@ Open the [Swagger documentation](http://127.0.0.1:8080/api/v1/documentation/) in
 | `pnpm run migrate:push` | Push schema changes to the database |
 | `pnpm run test` | Run the tests |
 | `pnpm run commitlint` | Check the commit message format |
+
+## License
+
+Distributed under the [MIT License](https://github.com/rkulik/nodejs-backend-skeleton/blob/main/LICENSE), Copyright © 2024-PRESENT [René Kulik](https://www.kulik.io/)
