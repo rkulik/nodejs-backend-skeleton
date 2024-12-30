@@ -13,10 +13,6 @@
     "nodejs",
     "api"
   ],
-  "engines": {
-    "node": "20.x",
-    "pnpm": "9.x"
-  },
   "scripts": {
     "build": "tsc --project tsconfig.json && tsc-alias --project tsconfig.json",
     "start": "node dist/index.js",
