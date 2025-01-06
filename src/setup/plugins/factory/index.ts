@@ -1,4 +1,4 @@
-import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
+import type { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 import { Factory } from '@src/factory';
 import fp from 'fastify-plugin';
 

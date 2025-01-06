@@ -1,7 +1,7 @@
-import { ReadCommentAction } from '@modules/comments/actions/read-comment-action';
-import { Comment, UpdateCommentDto } from '@modules/comments/schemas/base';
+import type { ReadCommentAction } from '@modules/comments/actions/read-comment-action';
+import type { Comment, UpdateCommentDto } from '@modules/comments/schemas/base';
 import { comments } from '@modules/comments/schemas/database';
-import { Action, Database } from '@src/types';
+import type { Action, Database } from '@src/types';
 import { eq } from 'drizzle-orm';
 
 export class UpdateCommentAction implements Action<Comment | undefined> {

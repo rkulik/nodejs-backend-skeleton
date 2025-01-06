@@ -8,7 +8,8 @@ import { notFoundHandler } from '@setup/handlers/not-found-handler';
 import { migrateIfNeeded } from '@setup/hooks/migrate-if-needed';
 import factory from '@setup/plugins/factory';
 import jsend from '@setup/plugins/jsend';
-import fastify, { FastifyInstance } from 'fastify';
+import type { FastifyInstance } from 'fastify';
+import fastify from 'fastify';
 
 import path from 'path';
 

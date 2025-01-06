@@ -1,5 +1,5 @@
-import { User, RegisterUserDto } from '@modules/auth/schemas/base';
-import { Factory } from '@src/factory';
+import type { User, RegisterUserDto } from '@modules/auth/schemas/base';
+import type { Factory } from '@src/factory';
 
 export class RegisteredUsersController {
   public constructor(private factory: Factory) {}

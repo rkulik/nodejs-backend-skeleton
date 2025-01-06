@@ -1,4 +1,5 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import type { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 type Config = {
   secret: string;

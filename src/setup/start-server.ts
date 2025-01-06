@@ -1,4 +1,4 @@
-import { FastifyInstance, FastifyListenOptions } from 'fastify';
+import type { FastifyInstance, FastifyListenOptions } from 'fastify';
 
 export const startServer = async (instance: FastifyInstance, options: FastifyListenOptions): Promise<void> => {
   try {

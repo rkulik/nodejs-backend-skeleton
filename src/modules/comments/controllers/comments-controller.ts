@@ -1,5 +1,5 @@
-import { Comment, CreateCommentDto, UpdateCommentDto } from '@modules/comments/schemas/base';
-import { Factory } from '@src/factory';
+import type { Comment, CreateCommentDto, UpdateCommentDto } from '@modules/comments/schemas/base';
+import type { Factory } from '@src/factory';
 
 export class CommentsController {
   public constructor(private factory: Factory) {}

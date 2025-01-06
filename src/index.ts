@@ -10,4 +10,4 @@ const main = async (): Promise<void> => {
   await startServer(buildInstance(), { port, host });
 };
 
-main();
+void main();

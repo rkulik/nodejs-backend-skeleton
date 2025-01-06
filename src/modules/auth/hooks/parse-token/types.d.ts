@@ -1,6 +1,6 @@
-import { TokenPayload } from '@src/types';
+import type { TokenPayload } from '@src/types';
 import 'fastify';
-import { JwtPayload } from 'jsonwebtoken';
+import type { JwtPayload } from 'jsonwebtoken';
 
 declare module 'fastify' {
   interface FastifyRequest {

@@ -1,4 +1,4 @@
-import { Factory } from '@src/factory';
+import type { Factory } from '@src/factory';
 import 'fastify';
 
 declare module 'fastify' {

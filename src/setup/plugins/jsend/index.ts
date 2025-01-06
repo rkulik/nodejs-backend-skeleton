@@ -1,5 +1,5 @@
-import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
-import { FastifyReply } from 'fastify';
+import type { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
+import type { FastifyReply } from 'fastify';
 import fp from 'fastify-plugin';
 
 type Data = Record<string, unknown>;

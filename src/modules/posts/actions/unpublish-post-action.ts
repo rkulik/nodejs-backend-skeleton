@@ -1,7 +1,7 @@
-import { ReadPostAction } from '@modules/posts/actions/read-post-action';
-import { Post } from '@modules/posts/schemas/base';
+import type { ReadPostAction } from '@modules/posts/actions/read-post-action';
+import type { Post } from '@modules/posts/schemas/base';
 import { posts } from '@modules/posts/schemas/database';
-import { Action, Database } from '@src/types';
+import type { Action, Database } from '@src/types';
 import { eq } from 'drizzle-orm';
 
 export class UnpublishPostAction implements Action<Post | undefined> {

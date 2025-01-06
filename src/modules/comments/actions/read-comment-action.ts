@@ -1,6 +1,6 @@
-import { Comment } from '@modules/comments/schemas/base';
+import type { Comment } from '@modules/comments/schemas/base';
 import { comments } from '@modules/comments/schemas/database';
-import { Action, Database } from '@src/types';
+import type { Action, Database } from '@src/types';
 import { eq } from 'drizzle-orm';
 
 export class ReadCommentAction implements Action<Comment | undefined> {

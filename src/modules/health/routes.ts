@@ -1,4 +1,4 @@
-import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
+import type { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 import { getHealthSchema } from '@modules/health/schemas/base';
 
 const health: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {

@@ -1,4 +1,4 @@
-import { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
+import type { BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
 
 export type Action<T = void> = {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,7 +1,8 @@
-import { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify';
+import type { FastifyReply, FastifyRequest, HookHandlerDoneFunction } from 'fastify';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isValidFastifyReply = (potentialReply: any): potentialReply is FastifyReply => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   return typeof potentialReply.code === 'function' && typeof potentialReply.sendError === 'function';
 };
 

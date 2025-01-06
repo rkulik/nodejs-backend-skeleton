@@ -23,7 +23,7 @@ import { UpdatePostAction } from '@modules/posts/actions/update-post-action';
 import { PostsController } from '@modules/posts/controllers/posts-controller';
 import { PublishedPostsController } from '@modules/posts/controllers/published-posts-controller';
 import { SqliteDatabase } from '@src/sqlite-database';
-import { Database, TokenPayload } from '@src/types';
+import type { Database, TokenPayload } from '@src/types';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
 
 export class Factory {

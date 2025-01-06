@@ -1,4 +1,4 @@
-import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
+import type { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 import { loginUserSchema, registerUserSchema } from '@modules/auth/schemas/base';
 
 const auth: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {

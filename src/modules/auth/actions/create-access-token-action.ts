@@ -1,8 +1,8 @@
-import { ReadUserAction } from '@modules/auth/actions/read-user-action';
-import { JwtHandler } from '@modules/auth/handlers/jwt-handler';
-import { PasswordHandler } from '@modules/auth/handlers/password-handler';
-import { LoginUserDto } from '@modules/auth/schemas/base';
-import { Action, TokenPayload } from '@src/types';
+import type { ReadUserAction } from '@modules/auth/actions/read-user-action';
+import type { JwtHandler } from '@modules/auth/handlers/jwt-handler';
+import type { PasswordHandler } from '@modules/auth/handlers/password-handler';
+import type { LoginUserDto } from '@modules/auth/schemas/base';
+import type { Action, TokenPayload } from '@src/types';
 
 export class CreateAccessTokenAction implements Action<Promise<string | undefined>> {
   public constructor(

@@ -1,5 +1,5 @@
-import { LoginUserDto } from '@modules/auth/schemas/base';
-import { Factory } from '@src/factory';
+import type { LoginUserDto } from '@modules/auth/schemas/base';
+import type { Factory } from '@src/factory';
 
 export class AccessTokensController {
   public constructor(private factory: Factory) {}

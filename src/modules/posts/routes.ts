@@ -1,4 +1,4 @@
-import { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
+import type { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 import { ensureAuthenticated } from '@modules/auth/hooks/ensure-authenticated';
 import { checkPostExistenceAndOwnership } from '@modules/posts/hooks/check-post-existence-and-ownership';
 import {

@@ -1,7 +1,7 @@
-import { posts } from '@modules/posts/schemas/database';
+import type { posts } from '@modules/posts/schemas/database';
 import { headersSchema, notFoundSchema, unauthorizedSchema } from '@src/schemas';
-import { InferSelectModel } from 'drizzle-orm';
-import { FromSchema } from 'json-schema-to-ts';
+import type { InferSelectModel } from 'drizzle-orm';
+import type { FromSchema } from 'json-schema-to-ts';
 
 export type Post = InferSelectModel<typeof posts>;
 

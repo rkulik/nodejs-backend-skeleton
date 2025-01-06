@@ -1,7 +1,7 @@
-import { Comment } from '@modules/comments/schemas/base';
+import type { Comment } from '@modules/comments/schemas/base';
 import { comments } from '@modules/comments/schemas/database';
-import { ReadPostAction } from '@modules/posts/actions/read-post-action';
-import { Action, Database } from '@src/types';
+import type { ReadPostAction } from '@modules/posts/actions/read-post-action';
+import type { Action, Database } from '@src/types';
 import { eq } from 'drizzle-orm';
 
 export class ReadPostCommentsAction implements Action<Comment[] | undefined> {
