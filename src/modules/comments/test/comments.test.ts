@@ -2,10 +2,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
+import { initializeUser } from '@modules/auth/test/utils';
+import { createComment, deleteComment, getComment, getComments, updateComment } from '@modules/comments/test/utils';
+import { createPost, deletePost } from '@modules/posts/test/utils';
 import { buildInstance } from '@setup/build-instance';
-import { initializeUser } from '@tests/utils/auth';
-import { createComment, deleteComment, getComment, getComments, updateComment } from '@tests/utils/comments';
-import { createPost, deletePost } from '@tests/utils/posts';
 
 const instance = buildInstance();
 const server = instance.server;

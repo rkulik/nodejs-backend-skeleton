@@ -12,8 +12,8 @@ describe('health', () => {
     await instance.ready();
   });
 
-  afterAll(() => {
-    void instance.close();
+  afterAll(async () => {
+    await instance.close();
   });
 
   it('should respond with health information', () => {

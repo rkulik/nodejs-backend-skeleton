@@ -10,8 +10,7 @@
       "@configs/*": ["./src/configs/*"],
       "@modules/*": ["./src/modules/*"],
       "@setup/*": ["./src/setup/*"],
-      "@src/*": ["./src/*"],
-      "@tests/*": ["./tests/*"]
+      "@src/*": ["./src/*"]
     },
     "resolveJsonModule": true,
     "outDir": "dist",

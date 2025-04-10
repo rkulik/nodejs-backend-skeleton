@@ -3,12 +3,10 @@
     "^@configs/(.*)$": "<rootDir>/src/configs/$1",
     "^@modules/(.*)$": "<rootDir>/src/modules/$1",
     "^@setup/(.*)$": "<rootDir>/src/setup/$1",
-    "^@src/(.*)$": "<rootDir>/src/$1",
-    "^@tests/(.*)$": "<rootDir>/tests/$1"
+    "^@src/(.*)$": "<rootDir>/src/$1"
   },
   "preset": "ts-jest",
-  "roots": ["<rootDir>/tests"],
-  "setupFilesAfterEnv": ["<rootDir>/setup-jest.ts"],
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.ts"],
   "testEnvironment": "node",
   "transform": {
     "^.+\\.tsx?$": "ts-jest"

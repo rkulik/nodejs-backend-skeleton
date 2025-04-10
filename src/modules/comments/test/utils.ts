@@ -1,5 +1,5 @@
 import type { CreateCommentDto, UpdateCommentDto } from '@modules/comments/schemas/base';
-import { POSTS_API } from '@tests/utils/posts';
+import { POSTS_API } from '@modules/posts/test/utils';
 import type { RawServerDefault } from 'fastify';
 import type { Response } from 'supertest';
 import supertest from 'supertest';

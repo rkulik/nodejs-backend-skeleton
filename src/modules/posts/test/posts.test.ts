@@ -2,9 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { describe, beforeAll, afterAll, it, expect } from '@jest/globals';
+import { initializeUser } from '@modules/auth/test/utils';
+import {
+  createPost,
+  deletePost,
+  getPost,
+  getPosts,
+  publishPost,
+  unpublishPost,
+  updatePost,
+} from '@modules/posts/test/utils';
 import { buildInstance } from '@setup/build-instance';
-import { initializeUser } from '@tests/utils/auth';
-import { createPost, deletePost, getPost, getPosts, publishPost, unpublishPost, updatePost } from '@tests/utils/posts';
 
 const instance = buildInstance();
 const server = instance.server;
@@ -14,8 +22,8 @@ describe('posts', () => {
     await instance.ready();
   });
 
-  afterAll(() => {
-    void instance.close();
+  afterAll(async () => {
+    await instance.close();
   });
 
   it('should create a post', async () => {

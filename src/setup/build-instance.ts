@@ -31,6 +31,7 @@ export const buildInstance = (): FastifyInstance => {
     })
     .register(autload, {
       dir: path.join(__dirname, '..', 'modules'),
+      ignorePattern: /test/,
       options: { prefix: config.server.apiPrefix },
       dirNameRoutePrefix: false,
     })
