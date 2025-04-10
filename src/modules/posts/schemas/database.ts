@@ -1,4 +1,4 @@
-import { users } from '@modules/auth/schemas/database';
+import { users } from '@app/modules/auth/schemas/database';
 import { sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 

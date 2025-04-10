@@ -1,8 +1,8 @@
-import type { ReadUserAction } from '@modules/auth/actions/read-user-action';
-import type { PasswordHandler } from '@modules/auth/handlers/password-handler';
-import type { RegisterUserDto, User } from '@modules/auth/schemas/base';
-import { users } from '@modules/auth/schemas/database';
-import type { Action, Database } from '@src/types';
+import type { ReadUserAction } from '@app/modules/auth/actions/read-user-action';
+import type { PasswordHandler } from '@app/modules/auth/handlers/password-handler';
+import type { RegisterUserDto, User } from '@app/modules/auth/schemas/base';
+import { users } from '@app/modules/auth/schemas/database';
+import type { Action, Database } from '@app/types';
 
 export class RegisterUserAction implements Action<Promise<User | undefined>> {
   public constructor(

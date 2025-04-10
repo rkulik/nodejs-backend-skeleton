@@ -1,4 +1,4 @@
-import type { LoginUserDto, RegisterUserDto } from '@modules/auth/schemas/base';
+import type { LoginUserDto, RegisterUserDto } from '@app/modules/auth/schemas/base';
 import type { RawServerDefault } from 'fastify';
 import type { Response } from 'supertest';
 import supertest from 'supertest';

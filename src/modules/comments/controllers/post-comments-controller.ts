@@ -1,5 +1,5 @@
-import type { Comment } from '@modules/comments/schemas/base';
-import type { Factory } from '@src/factory';
+import type { Factory } from '@app/factory';
+import type { Comment } from '@app/modules/comments/schemas/base';
 
 export class PostCommentsController {
   public constructor(private factory: Factory) {}

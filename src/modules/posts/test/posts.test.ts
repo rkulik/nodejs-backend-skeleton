@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { describe, beforeAll, afterAll, it, expect } from '@jest/globals';
-import { initializeUser } from '@modules/auth/test/utils';
+import { initializeUser } from '@app/modules/auth/test/utils';
 import {
   createPost,
   deletePost,
@@ -11,8 +10,9 @@ import {
   publishPost,
   unpublishPost,
   updatePost,
-} from '@modules/posts/test/utils';
-import { buildInstance } from '@setup/build-instance';
+} from '@app/modules/posts/test/utils';
+import { buildInstance } from '@app/setup/build-instance';
+import { describe, beforeAll, afterAll, it, expect } from '@jest/globals';
 
 const instance = buildInstance();
 const server = instance.server;

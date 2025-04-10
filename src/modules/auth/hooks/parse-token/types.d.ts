@@ -1,4 +1,4 @@
-import type { TokenPayload } from '@src/types';
+import type { TokenPayload } from '@app/types';
 import 'fastify';
 import type { JwtPayload } from 'jsonwebtoken';
 

@@ -1,13 +1,13 @@
-import type { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
-import { ensureAuthenticated } from '@modules/auth/hooks/ensure-authenticated';
-import { checkCommentExistenceAndOwnership } from '@modules/comments/hooks/check-comment-existence-and-ownership';
+import { ensureAuthenticated } from '@app/modules/auth/hooks/ensure-authenticated';
+import { checkCommentExistenceAndOwnership } from '@app/modules/comments/hooks/check-comment-existence-and-ownership';
 import {
   createCommentSchema,
   deleteCommentSchema,
   getCommentSchema,
   getPostCommentsSchema,
   updateCommentSchema,
-} from '@modules/comments/schemas/base';
+} from '@app/modules/comments/schemas/base';
+import type { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 
 const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
   const commentsController = server.factory.createCommentsController();

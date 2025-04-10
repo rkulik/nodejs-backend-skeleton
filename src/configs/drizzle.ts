@@ -1,4 +1,4 @@
-import { config as baseConfig } from '@configs/base';
+import { config as baseConfig } from '@app/configs/base';
 import type { Config } from 'drizzle-kit';
 
 const config: Config = {

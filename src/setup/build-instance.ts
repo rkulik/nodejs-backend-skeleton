@@ -1,13 +1,13 @@
-import { config } from '@configs/base';
+import { config } from '@app/configs/base';
+import { parseToken } from '@app/modules/auth/hooks/parse-token';
+import { errorHandler } from '@app/setup/handlers/error-handler';
+import { notFoundHandler } from '@app/setup/handlers/not-found-handler';
+import { migrateIfNeeded } from '@app/setup/hooks/migrate-if-needed';
+import factory from '@app/setup/plugins/factory';
+import jsend from '@app/setup/plugins/jsend';
 import autload from '@fastify/autoload';
 import fastifySwagger from '@fastify/swagger';
 import fastifySwaggerUI from '@fastify/swagger-ui';
-import { parseToken } from '@modules/auth/hooks/parse-token';
-import { errorHandler } from '@setup/handlers/error-handler';
-import { notFoundHandler } from '@setup/handlers/not-found-handler';
-import { migrateIfNeeded } from '@setup/hooks/migrate-if-needed';
-import factory from '@setup/plugins/factory';
-import jsend from '@setup/plugins/jsend';
 import type { FastifyInstance } from 'fastify';
 import fastify from 'fastify';
 

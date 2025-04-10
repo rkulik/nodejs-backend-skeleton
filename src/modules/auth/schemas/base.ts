@@ -1,5 +1,5 @@
-import type { users } from '@modules/auth/schemas/database';
-import { badRequestSchema, unauthorizedSchema } from '@src/schemas';
+import type { users } from '@app/modules/auth/schemas/database';
+import { badRequestSchema, unauthorizedSchema } from '@app/schemas';
 import type { InferSelectModel } from 'drizzle-orm';
 import type { FromSchema } from 'json-schema-to-ts';
 

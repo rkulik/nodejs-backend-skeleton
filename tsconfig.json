@@ -7,10 +7,7 @@
     "moduleResolution": "NodeNext",
     "baseUrl": ".",
     "paths": {
-      "@configs/*": ["./src/configs/*"],
-      "@modules/*": ["./src/modules/*"],
-      "@setup/*": ["./src/setup/*"],
-      "@src/*": ["./src/*"]
+      "@app/*": ["./src/*"]
     },
     "resolveJsonModule": true,
     "outDir": "dist",

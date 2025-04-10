@@ -1,6 +1,5 @@
-import type { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
-import { ensureAuthenticated } from '@modules/auth/hooks/ensure-authenticated';
-import { checkPostExistenceAndOwnership } from '@modules/posts/hooks/check-post-existence-and-ownership';
+import { ensureAuthenticated } from '@app/modules/auth/hooks/ensure-authenticated';
+import { checkPostExistenceAndOwnership } from '@app/modules/posts/hooks/check-post-existence-and-ownership';
 import {
   createPostSchema,
   deletePostSchema,
@@ -9,7 +8,8 @@ import {
   publishPostSchema,
   unpublishPostSchema,
   updatePostSchema,
-} from '@modules/posts/schemas/base';
+} from '@app/modules/posts/schemas/base';
+import type { FastifyPluginCallbackJsonSchemaToTs } from '@fastify/type-provider-json-schema-to-ts';
 
 const posts: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
   const postsController = server.factory.createPostsController();

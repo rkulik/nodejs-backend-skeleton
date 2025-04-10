@@ -1,7 +1,7 @@
-import type { Comment, CreateCommentDto } from '@modules/comments/schemas/base';
-import { comments } from '@modules/comments/schemas/database';
-import type { ReadPostAction } from '@modules/posts/actions/read-post-action';
-import type { Action, Database } from '@src/types';
+import type { Comment, CreateCommentDto } from '@app/modules/comments/schemas/base';
+import { comments } from '@app/modules/comments/schemas/database';
+import type { ReadPostAction } from '@app/modules/posts/actions/read-post-action';
+import type { Action, Database } from '@app/types';
 
 export class CreateCommentAction implements Action<Comment | undefined> {
   public constructor(

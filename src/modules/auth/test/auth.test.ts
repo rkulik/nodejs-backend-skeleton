@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { loginUser, registerUser } from '@app/modules/auth/test/utils';
+import { buildInstance } from '@app/setup/build-instance';
 import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
-import { loginUser, registerUser } from '@modules/auth/test/utils';
-import { buildInstance } from '@setup/build-instance';
 
 const instance = buildInstance();
 const server = instance.server;

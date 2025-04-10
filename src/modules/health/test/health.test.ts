@@ -1,5 +1,5 @@
+import { buildInstance } from '@app/setup/build-instance';
 import { afterAll, beforeAll, describe, it } from '@jest/globals';
-import { buildInstance } from '@setup/build-instance';
 import supertest from 'supertest';
 
 const HEALTH_API = '/api/v1/health';

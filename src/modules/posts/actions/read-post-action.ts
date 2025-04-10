@@ -1,6 +1,6 @@
-import type { Post } from '@modules/posts/schemas/base';
-import { posts } from '@modules/posts/schemas/database';
-import type { Action, Database } from '@src/types';
+import type { Post } from '@app/modules/posts/schemas/base';
+import { posts } from '@app/modules/posts/schemas/database';
+import type { Action, Database } from '@app/types';
 import { eq } from 'drizzle-orm';
 
 export class ReadPostAction implements Action<Post | undefined> {

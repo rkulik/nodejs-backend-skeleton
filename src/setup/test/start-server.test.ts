@@ -1,5 +1,5 @@
+import { startServer } from '@app/setup/start-server';
 import { describe, expect, it, jest } from '@jest/globals';
-import { startServer } from '@setup/start-server';
 import type { FastifyInstance } from 'fastify';
 
 import { afterEach } from 'node:test';

@@ -1,5 +1,5 @@
-import { comments } from '@modules/comments/schemas/database';
-import type { Action, Database } from '@src/types';
+import { comments } from '@app/modules/comments/schemas/database';
+import type { Action, Database } from '@app/types';
 import { eq } from 'drizzle-orm';
 
 export class DeleteCommentAction implements Action<boolean> {

@@ -1,4 +1,4 @@
-import type { CreatePostDto, PublishPostDto, UpdatePostDto } from '@modules/posts/schemas/base';
+import type { CreatePostDto, PublishPostDto, UpdatePostDto } from '@app/modules/posts/schemas/base';
 import type { RawServerDefault } from 'fastify';
 import type { Response } from 'supertest';
 import supertest from 'supertest';

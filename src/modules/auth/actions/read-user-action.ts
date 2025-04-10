@@ -1,6 +1,6 @@
-import type { User } from '@modules/auth/schemas/base';
-import { users } from '@modules/auth/schemas/database';
-import type { Action, Database } from '@src/types';
+import type { User } from '@app/modules/auth/schemas/base';
+import { users } from '@app/modules/auth/schemas/database';
+import type { Action, Database } from '@app/types';
 import { eq } from 'drizzle-orm';
 
 export class ReadUserAction implements Action<User | undefined> {

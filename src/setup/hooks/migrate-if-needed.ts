@@ -1,4 +1,4 @@
-import { config } from '@configs/base';
+import { config } from '@app/configs/base';
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator';
 import type { onReadyHookHandler } from 'fastify';
 

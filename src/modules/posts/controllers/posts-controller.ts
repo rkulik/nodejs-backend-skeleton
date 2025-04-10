@@ -1,5 +1,5 @@
-import type { CreatePostDto, Post, UpdatePostDto } from '@modules/posts/schemas/base';
-import type { Factory } from '@src/factory';
+import type { Factory } from '@app/factory';
+import type { CreatePostDto, Post, UpdatePostDto } from '@app/modules/posts/schemas/base';
 
 export class PostsController {
   public constructor(private factory: Factory) {}
