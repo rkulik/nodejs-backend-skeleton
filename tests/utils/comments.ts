@@ -1,7 +1,8 @@
-import { CreateCommentDto, UpdateCommentDto } from '@modules/comments/schemas/base';
+import type { CreateCommentDto, UpdateCommentDto } from '@modules/comments/schemas/base';
 import { POSTS_API } from '@tests/utils/posts';
-import { RawServerDefault } from 'fastify';
-import supertest, { Response } from 'supertest';
+import type { RawServerDefault } from 'fastify';
+import type { Response } from 'supertest';
+import supertest from 'supertest';
 
 const COMMENTS_API = '/api/v1/comments';
 

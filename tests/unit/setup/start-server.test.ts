@@ -1,45 +1,41 @@
+import { describe, expect, it, jest } from '@jest/globals';
 import { startServer } from '@setup/start-server';
-import fastify, { FastifyInstance, FastifyListenOptions } from 'fastify';
+import type { FastifyInstance } from 'fastify';
 
-jest.mock('fastify', () => {
-  return {
-    __esModule: true,
-    default: jest.fn(() => {
-      return {
-        listen: jest.fn().mockResolvedValue('127.0.0.1:3000'),
-      };
-    }),
-    FastifyListenOptions: {},
-  };
-});
+import { afterEach } from 'node:test';
 
 describe('startServer', () => {
-  it('should start the server successfully', async () => {
-    const instance: FastifyInstance = fastify();
-    const options: FastifyListenOptions = {};
-
-    await startServer(instance, options);
-
-    expect(instance.listen).toHaveBeenCalledWith(options);
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
-  it('should log an error and exit the process if server fails to start', async () => {
-    const errorMessage = 'Server failed to start';
-    const instance: FastifyInstance = fastify();
-    const options: FastifyListenOptions = {};
+  it('should start the server successfully', async () => {
+    const mockedListen = jest.fn();
+    const mockedInstance = { listen: mockedListen } as unknown as FastifyInstance;
+    const mockedOptions = {
+      port: 3000,
+      host: 'localhost',
+    };
 
-    (instance.listen as jest.Mock).mockRejectedValue(new Error(errorMessage));
+    await startServer(mockedInstance, mockedOptions);
 
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
-    const processExitSpy = jest.spyOn(process, 'exit').mockImplementation();
+    expect(mockedListen).toHaveBeenCalledWith(mockedOptions);
+  });
 
-    await startServer(instance, options);
+  it('should handle errors when starting the server', async () => {
+    const mockedProcessExitError = new Error('process.exit was called');
+    const mockedProcessExit = jest.spyOn(process, 'exit').mockImplementation(() => {
+      throw mockedProcessExitError;
+    });
 
-    expect(instance.listen).toHaveBeenCalledWith(options);
-    expect(consoleErrorSpy).toHaveBeenCalledWith(new Error(errorMessage));
-    expect(processExitSpy).toHaveBeenCalledWith(1);
+    const mockedListen = jest.fn<() => Promise<void>>().mockRejectedValue(new Error('Server error'));
+    const mockedInstance = { listen: mockedListen } as unknown as FastifyInstance;
+    const mockedOptions = {
+      port: 3000,
+      host: 'localhost',
+    };
 
-    consoleErrorSpy.mockRestore();
-    processExitSpy.mockRestore();
+    await expect(startServer(mockedInstance, mockedOptions)).rejects.toThrow(mockedProcessExitError);
+    expect(mockedProcessExit).toHaveBeenCalledWith(1);
   });
 });

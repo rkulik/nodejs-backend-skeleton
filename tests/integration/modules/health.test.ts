@@ -1,3 +1,4 @@
+import { afterAll, beforeAll, describe, it } from '@jest/globals';
 import { buildInstance } from '@setup/build-instance';
 import supertest from 'supertest';
 
@@ -12,7 +13,7 @@ describe('health', () => {
   });
 
   afterAll(() => {
-    instance.close();
+    void instance.close();
   });
 
   it('should respond with health information', () => {

@@ -1,6 +1,7 @@
-import { CreatePostDto, PublishPostDto, UpdatePostDto } from '@modules/posts/schemas/base';
-import { RawServerDefault } from 'fastify';
-import supertest, { Response } from 'supertest';
+import type { CreatePostDto, PublishPostDto, UpdatePostDto } from '@modules/posts/schemas/base';
+import type { RawServerDefault } from 'fastify';
+import type { Response } from 'supertest';
+import supertest from 'supertest';
 
 export const POSTS_API = '/api/v1/posts';
 const PUBLISHED_POSTS_API = '/api/v1/published-posts';

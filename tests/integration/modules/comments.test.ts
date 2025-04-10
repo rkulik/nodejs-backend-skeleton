@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
 import { buildInstance } from '@setup/build-instance';
 import { initializeUser } from '@tests/utils/auth';
 import { createComment, deleteComment, getComment, getComments, updateComment } from '@tests/utils/comments';
@@ -11,8 +15,8 @@ describe('comments', () => {
     await instance.ready();
   });
 
-  afterAll(() => {
-    instance.close();
+  afterAll(async () => {
+    await instance.close();
   });
 
   it('should create a comment', async () => {

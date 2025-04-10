@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
 import { buildInstance } from '@setup/build-instance';
 import { loginUser, registerUser } from '@tests/utils/auth';
 
@@ -10,7 +12,7 @@ describe('auth', () => {
   });
 
   afterAll(() => {
-    instance.close();
+    void instance.close();
   });
 
   it('should register a new user', async () => {

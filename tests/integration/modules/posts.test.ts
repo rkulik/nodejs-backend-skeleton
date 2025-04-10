@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { describe, beforeAll, afterAll, it, expect } from '@jest/globals';
 import { buildInstance } from '@setup/build-instance';
 import { initializeUser } from '@tests/utils/auth';
 import { createPost, deletePost, getPost, getPosts, publishPost, unpublishPost, updatePost } from '@tests/utils/posts';
@@ -11,7 +15,7 @@ describe('posts', () => {
   });
 
   afterAll(() => {
-    instance.close();
+    void instance.close();
   });
 
   it('should create a post', async () => {

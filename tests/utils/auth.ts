@@ -1,6 +1,7 @@
-import { LoginUserDto, RegisterUserDto } from '@modules/auth/schemas/base';
-import { RawServerDefault } from 'fastify';
-import supertest, { Response } from 'supertest';
+import type { LoginUserDto, RegisterUserDto } from '@modules/auth/schemas/base';
+import type { RawServerDefault } from 'fastify';
+import type { Response } from 'supertest';
+import supertest from 'supertest';
 
 const AUTH_API = '/api/v1/auth';
 
