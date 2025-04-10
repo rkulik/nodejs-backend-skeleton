@@ -1,7 +1,7 @@
 import { ensureAuthenticated } from '@app/modules/auth/hooks/ensure-authenticated';
 import { checkCommentExistenceAndOwnership } from '@app/modules/comments/hooks/check-comment-existence-and-ownership';
 import {
-  createCommentSchema,
+  createPostCommentSchema,
   deleteCommentSchema,
   getCommentSchema,
   getPostCommentsSchema,
@@ -13,19 +13,23 @@ const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) =
   const commentsController = server.factory.createCommentsController();
   const postCommentsController = server.factory.createPostCommentsController();
 
-  server.post('/comments', { ...createCommentSchema, preHandler: ensureAuthenticated }, (request, reply) => {
-    const comment = commentsController.create(request.body, request.tokenPayload!.user.id);
-    if (comment) {
-      reply.code(201).sendSuccess({ comment });
-    } else {
-      reply.code(404).sendFail({ message: 'Post not found' });
-    }
-  });
+  server.post(
+    '/posts/:id/comments',
+    { ...createPostCommentSchema, preHandler: ensureAuthenticated },
+    (request, reply) => {
+      const comment = postCommentsController.create(request.params.id, request.body, request.tokenPayload!.user.id);
+      if (comment) {
+        reply.code(201).sendSuccess(comment);
+      } else {
+        reply.code(404).sendFail({ message: 'Post not found' });
+      }
+    },
+  );
 
   server.get('/posts/:id/comments', getPostCommentsSchema, (request, reply) => {
     const comments = postCommentsController.readAll(request.params.id);
     if (comments) {
-      reply.sendSuccess({ comments });
+      reply.sendSuccess(comments);
     } else {
       reply.code(404).sendFail({ message: 'Post not found' });
     }
@@ -34,19 +38,19 @@ const comments: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) =
   server.get('/comments/:id', getCommentSchema, (request, reply) => {
     const comment = commentsController.read(request.params.id);
     if (comment) {
-      reply.sendSuccess({ comment });
+      reply.sendSuccess(comment);
     } else {
       reply.code(404).sendFail({ message: 'Comment not found' });
     }
   });
 
-  server.put(
+  server.patch(
     '/comments/:id',
     { ...updateCommentSchema, preHandler: [ensureAuthenticated, checkCommentExistenceAndOwnership] },
     (request, reply) => {
       const updatedComment = commentsController.update(request.params.id, request.body);
       if (updatedComment) {
-        reply.sendSuccess({ comment: updatedComment });
+        reply.sendSuccess(updatedComment);
       } else {
         reply.code(404).sendFail({ message: 'Comment not found' });
       }

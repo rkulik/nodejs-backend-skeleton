@@ -25,19 +25,12 @@ export const registerUserSchema = {
           data: {
             type: 'object',
             properties: {
-              user: {
-                type: 'object',
-                properties: {
-                  id: { type: 'number' },
-                  name: { type: 'string' },
-                  createdAt: { type: 'number' },
-                  updatedAt: { type: 'number', nullable: true },
-                },
-                required: ['id', 'name', 'createdAt', 'updatedAt'],
-                additionalProperties: false,
-              },
+              id: { type: 'number' },
+              name: { type: 'string' },
+              createdAt: { type: 'number' },
+              updatedAt: { type: 'number', nullable: true },
             },
-            required: ['user'],
+            required: ['id', 'name', 'createdAt', 'updatedAt'],
             additionalProperties: false,
           },
         },

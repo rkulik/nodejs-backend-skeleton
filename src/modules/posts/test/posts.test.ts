@@ -38,7 +38,7 @@ describe('posts', () => {
     expect(response.statusCode).toBe(201);
     expect(response.body).toMatchObject({
       status: 'success',
-      data: { post: { id: 1, title: 'Some title', content: 'Some content', publishedAt: null } },
+      data: { id: 1, title: 'Some title', content: 'Some content', publishedAt: null },
     });
   });
 
@@ -60,7 +60,7 @@ describe('posts', () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toMatchObject({
       status: 'success',
-      data: { post: { id: 1, title: 'Some title', content: 'Some content', publishedAt: null } },
+      data: { id: 1, title: 'Some title', content: 'Some content', publishedAt: null },
     });
   });
 
@@ -77,7 +77,7 @@ describe('posts', () => {
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(200);
-    expect(response.body).toMatchObject({ status: 'success', data: { posts: [] } });
+    expect(response.body).toMatchObject({ status: 'success', data: [] });
   });
 
   it('should update a post', async () => {
@@ -93,7 +93,7 @@ describe('posts', () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toMatchObject({
       status: 'success',
-      data: { post: { id: 1, title: 'Some updated title', content: 'Some updated content', publishedAt: null } },
+      data: { id: 1, title: 'Some updated title', content: 'Some updated content', publishedAt: null },
     });
   });
 
@@ -119,12 +119,10 @@ describe('posts', () => {
       content: 'Some content',
     });
 
-    const response = await updatePost(
-      server,
-      secondUserResponse.body.data.accessToken,
-      postResponse.body.data.post.id,
-      { title: 'Some updated title', content: 'Some updated content' },
-    );
+    const response = await updatePost(server, secondUserResponse.body.data.accessToken, postResponse.body.data.id, {
+      title: 'Some updated title',
+      content: 'Some updated content',
+    });
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(401);
@@ -152,7 +150,7 @@ describe('posts', () => {
       content: 'Some content',
     });
 
-    const response = await deletePost(server, userResponse.body.data.accessToken, postResponse.body.data.post.id);
+    const response = await deletePost(server, userResponse.body.data.accessToken, postResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe(undefined);
     expect(response.statusCode).toBe(204);
@@ -165,7 +163,7 @@ describe('posts', () => {
       content: 'Some content',
     });
 
-    const response = await deletePost(server, 'invalid access token', postResponse.body.data.post.id);
+    const response = await deletePost(server, 'invalid access token', postResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(401);
@@ -180,7 +178,7 @@ describe('posts', () => {
       content: 'Some content',
     });
 
-    const response = await deletePost(server, secondUserResponse.body.data.accessToken, postResponse.body.data.post.id);
+    const response = await deletePost(server, secondUserResponse.body.data.accessToken, postResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(401);
@@ -206,12 +204,12 @@ describe('posts', () => {
     });
 
     const response = await publishPost(server, userResponse.body.data.accessToken, {
-      id: postResponse.body.data.post.id,
+      id: postResponse.body.data.id,
     });
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(200);
-    expect(response.body.data.post.publishedAt).not.toBe(null);
+    expect(response.body.data.publishedAt).not.toBe(null);
   });
 
   it('should not publish a post if not authenticated', async () => {
@@ -221,7 +219,7 @@ describe('posts', () => {
       content: 'Some content',
     });
 
-    const response = await publishPost(server, 'invalid access token', { id: postResponse.body.data.post.id });
+    const response = await publishPost(server, 'invalid access token', { id: postResponse.body.data.id });
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(401);
@@ -237,7 +235,7 @@ describe('posts', () => {
     });
 
     const response = await publishPost(server, secondUserResponse.body.data.accessToken, {
-      id: postResponse.body.data.post.id,
+      id: postResponse.body.data.id,
     });
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
@@ -262,13 +260,13 @@ describe('posts', () => {
       title: 'Some title',
       content: 'Some content',
     });
-    await publishPost(server, userResponse.body.data.accessToken, { id: postResponse.body.data.post.id });
+    await publishPost(server, userResponse.body.data.accessToken, { id: postResponse.body.data.id });
 
-    const response = await unpublishPost(server, userResponse.body.data.accessToken, postResponse.body.data.post.id);
+    const response = await unpublishPost(server, userResponse.body.data.accessToken, postResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(200);
-    expect(response.body.data.post.publishedAt).toBe(null);
+    expect(response.body.data.publishedAt).toBe(null);
   });
 
   it('should not unpublish a post if not authenticated', async () => {
@@ -277,9 +275,9 @@ describe('posts', () => {
       title: 'Some title',
       content: 'Some content',
     });
-    await publishPost(server, userResponse.body.data.accessToken, { id: postResponse.body.data.post.id });
+    await publishPost(server, userResponse.body.data.accessToken, { id: postResponse.body.data.id });
 
-    const response = await unpublishPost(server, 'invalid access token', postResponse.body.data.post.id);
+    const response = await unpublishPost(server, 'invalid access token', postResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(401);
@@ -293,13 +291,9 @@ describe('posts', () => {
       title: 'Some title',
       content: 'Some content',
     });
-    await publishPost(server, firstUserResponse.body.data.accessToken, { id: postResponse.body.data.post.id });
+    await publishPost(server, firstUserResponse.body.data.accessToken, { id: postResponse.body.data.id });
 
-    const response = await unpublishPost(
-      server,
-      secondUserResponse.body.data.accessToken,
-      postResponse.body.data.post.id,
-    );
+    const response = await unpublishPost(server, secondUserResponse.body.data.accessToken, postResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(401);
@@ -312,7 +306,7 @@ describe('posts', () => {
       title: 'Some title',
       content: 'Some content',
     });
-    await publishPost(server, userResponse.body.data.accessToken, { id: postResponse.body.data.post.id });
+    await publishPost(server, userResponse.body.data.accessToken, { id: postResponse.body.data.id });
 
     const response = await unpublishPost(server, userResponse.body.data.accessToken, 2);
 

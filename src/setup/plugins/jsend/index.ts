@@ -5,7 +5,7 @@ import fp from 'fastify-plugin';
 type Data = Record<string, unknown>;
 
 const jsend: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
-  server.decorateReply('sendSuccess', function (this: FastifyReply, data: Data | null = null): FastifyReply {
+  server.decorateReply('sendSuccess', function (this: FastifyReply, data: Data | Data[] | null = null): FastifyReply {
     return this.send({ status: 'success', data });
   });
 

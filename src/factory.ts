@@ -6,7 +6,7 @@ import { AccessTokensController } from '@app/modules/auth/controllers/authentica
 import { RegisteredUsersController } from '@app/modules/auth/controllers/registered-users-controller';
 import { JwtHandler } from '@app/modules/auth/handlers/jwt-handler';
 import { PasswordHandler } from '@app/modules/auth/handlers/password-handler';
-import { CreateCommentAction } from '@app/modules/comments/actions/create-comment-action';
+import { CreatePostCommentAction } from '@app/modules/comments/actions/create-post-comment-action';
 import { DeleteCommentAction } from '@app/modules/comments/actions/delete-comment-action';
 import { ReadCommentAction } from '@app/modules/comments/actions/read-comment-action';
 import { ReadPostCommentsAction } from '@app/modules/comments/actions/read-post-comments-action';
@@ -67,8 +67,8 @@ export class Factory {
     return new CommentsController(this);
   }
 
-  public createCreateCommentAction(): CreateCommentAction {
-    return new CreateCommentAction(this.createDatabase(), this.createReadPostAction());
+  public createCreatePostCommentAction(): CreatePostCommentAction {
+    return new CreatePostCommentAction(this.createDatabase(), this.createReadPostAction());
   }
 
   public createReadCommentAction(): ReadCommentAction {

@@ -18,16 +18,23 @@ const commentSchema = {
   additionalProperties: false,
 };
 
-export const createCommentSchema = {
+export const createPostCommentSchema = {
   schema: {
     headers: headersSchema,
+    params: {
+      type: 'object',
+      properties: {
+        id: { type: 'number' },
+      },
+      required: ['id'],
+      additionalProperties: false,
+    },
     body: {
       type: 'object',
       properties: {
-        postId: { type: 'number' },
         content: { type: 'string' },
       },
-      required: ['postId', 'content'],
+      required: ['content'],
       additionalProperties: false,
     },
     response: {
@@ -35,14 +42,7 @@ export const createCommentSchema = {
         type: 'object',
         properties: {
           status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              comment: commentSchema,
-            },
-            required: ['comment'],
-            additionalProperties: false,
-          },
+          data: commentSchema,
         },
         required: ['status', 'data'],
         additionalProperties: false,
@@ -53,7 +53,7 @@ export const createCommentSchema = {
   },
 } as const;
 
-export type CreateCommentDto = FromSchema<typeof createCommentSchema.schema.body>;
+export type CreatePostCommentDto = FromSchema<typeof createPostCommentSchema.schema.body>;
 
 export const getPostCommentsSchema = {
   schema: {
@@ -71,15 +71,8 @@ export const getPostCommentsSchema = {
         properties: {
           status: { type: 'string' },
           data: {
-            type: 'object',
-            properties: {
-              comments: {
-                type: 'array',
-                items: commentSchema,
-              },
-            },
-            required: ['comments'],
-            additionalProperties: false,
+            type: 'array',
+            items: commentSchema,
           },
         },
         required: ['status', 'data'],
@@ -105,14 +98,7 @@ export const getCommentSchema = {
         type: 'object',
         properties: {
           status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              comment: commentSchema,
-            },
-            required: ['comment'],
-            additionalProperties: false,
-          },
+          data: commentSchema,
         },
         required: ['status', 'data'],
         additionalProperties: false,
@@ -146,14 +132,7 @@ export const updateCommentSchema = {
         type: 'object',
         properties: {
           status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              comment: commentSchema,
-            },
-            required: ['comment'],
-            additionalProperties: false,
-          },
+          data: commentSchema,
         },
         required: ['status', 'data'],
         additionalProperties: false,

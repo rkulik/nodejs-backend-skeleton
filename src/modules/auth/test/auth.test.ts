@@ -22,7 +22,7 @@ describe('auth', () => {
     expect(response.statusCode).toBe(201);
     expect(response.body).toMatchObject({
       status: 'success',
-      data: { user: { id: 1, name: 'John', updatedAt: null } },
+      data: { id: 1, name: 'John', updatedAt: null },
     });
   });
 

@@ -2,7 +2,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { initializeUser } from '@app/modules/auth/test/utils';
-import { createComment, deleteComment, getComment, getComments, updateComment } from '@app/modules/comments/test/utils';
+import {
+  createPostComment,
+  deleteComment,
+  getComment,
+  getPostComments,
+  updateComment,
+} from '@app/modules/comments/test/utils';
 import { createPost, deletePost } from '@app/modules/posts/test/utils';
 import { buildInstance } from '@app/setup/build-instance';
 import { afterAll, beforeAll, describe, expect, it } from '@jest/globals';
@@ -26,15 +32,15 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    const postId = postResponse.body.data.post.id;
+    const postId = postResponse.body.data.id;
 
-    const response = await createComment(server, accessToken, { postId, content: 'Some content' });
+    const response = await createPostComment(server, accessToken, postId, { content: 'Some content' });
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(201);
     expect(response.body).toMatchObject({
       status: 'success',
-      data: { comment: { id: 1, postId, content: 'Some content' } },
+      data: { id: 1, postId, content: 'Some content' },
     });
   });
 
@@ -46,8 +52,7 @@ describe('comments', () => {
       content: 'Some post content',
     });
 
-    const response = await createComment(server, 'invalid access token', {
-      postId: postResponse.body.data.post.id,
+    const response = await createPostComment(server, 'invalid access token', postResponse.body.data.id, {
       content: 'Some content',
     });
 
@@ -59,8 +64,7 @@ describe('comments', () => {
   it('should not create a comment if post does not exist', async () => {
     const userResponse = await initializeUser(server, { name: 'John', email: 'john@doe.com', password: 'pw' });
 
-    const response = await createComment(server, userResponse.body.data.accessToken, {
-      postId: 1,
+    const response = await createPostComment(server, userResponse.body.data.accessToken, 1, {
       content: 'Some content',
     });
 
@@ -76,16 +80,16 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    const postId = postResponse.body.data.post.id;
-    const commentResponse = await createComment(server, accessToken, { postId, content: 'Some content' });
+    const postId = postResponse.body.data.id;
+    const commentResponse = await createPostComment(server, accessToken, postId, { content: 'Some content' });
 
-    const response = await getComment(server, commentResponse.body.data.comment.id);
+    const response = await getComment(server, commentResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(200);
     expect(response.body).toMatchObject({
       status: 'success',
-      data: { comment: { id: 1, postId, content: 'Some content' } },
+      data: { id: 1, postId, content: 'Some content' },
     });
   });
 
@@ -104,11 +108,11 @@ describe('comments', () => {
       content: 'Some post content',
     });
 
-    const response = await getComments(server, postResponse.body.data.post.id);
+    const response = await getPostComments(server, postResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(200);
-    expect(response.body).toMatchObject({ status: 'success', data: { comments: [] } });
+    expect(response.body).toMatchObject({ status: 'success', data: [] });
   });
 
   it('should update a comment', async () => {
@@ -118,10 +122,10 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    const postId = postResponse.body.data.post.id;
-    const commentResponse = await createComment(server, accessToken, { postId, content: 'Some content' });
+    const postId = postResponse.body.data.id;
+    const commentResponse = await createPostComment(server, accessToken, postId, { content: 'Some content' });
 
-    const response = await updateComment(server, accessToken, commentResponse.body.data.comment.id, {
+    const response = await updateComment(server, accessToken, commentResponse.body.data.id, {
       content: 'Some updated content',
     });
 
@@ -129,7 +133,7 @@ describe('comments', () => {
     expect(response.statusCode).toBe(200);
     expect(response.body).toMatchObject({
       status: 'success',
-      data: { comment: { id: 1, postId, content: 'Some updated content' } },
+      data: { id: 1, postId, content: 'Some updated content' },
     });
   });
 
@@ -140,12 +144,11 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    const commentResponse = await createComment(server, accessToken, {
-      postId: postResponse.body.data.post.id,
+    const commentResponse = await createPostComment(server, accessToken, postResponse.body.data.id, {
       content: 'Some content',
     });
 
-    const response = await updateComment(server, 'invalid access token', commentResponse.body.data.comment.id, {
+    const response = await updateComment(server, 'invalid access token', commentResponse.body.data.id, {
       content: 'Some updated content',
     });
 
@@ -161,15 +164,19 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    const commentResponse = await createComment(server, firstUserResponse.body.data.accessToken, {
-      postId: postResponse.body.data.post.id,
-      content: 'Some content',
-    });
+    const commentResponse = await createPostComment(
+      server,
+      firstUserResponse.body.data.accessToken,
+      postResponse.body.data.id,
+      {
+        content: 'Some content',
+      },
+    );
 
     const response = await updateComment(
       server,
       secondUserResponse.body.data.accessToken,
-      commentResponse.body.data.comment.id,
+      commentResponse.body.data.id,
       { content: 'Some updated content' },
     );
 
@@ -185,7 +192,7 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    await createComment(server, accessToken, { postId: postResponse.body.data.post.id, content: 'Some content' });
+    await createPostComment(server, accessToken, postResponse.body.data.id, { content: 'Some content' });
 
     const response = await updateComment(server, accessToken, 2, { content: 'Some updated content' });
 
@@ -201,12 +208,11 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    const commentResponse = await createComment(server, accessToken, {
-      postId: postResponse.body.data.post.id,
+    const commentResponse = await createPostComment(server, accessToken, postResponse.body.data.id, {
       content: 'Some content',
     });
 
-    const response = await deleteComment(server, accessToken, commentResponse.body.data.comment.id);
+    const response = await deleteComment(server, accessToken, commentResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe(undefined);
     expect(response.statusCode).toBe(204);
@@ -219,21 +225,21 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    const postId = postResponse.body.data.post.id;
-    const createCommentResponse = await createComment(server, accessToken, { postId, content: 'Some content' });
+    const postId = postResponse.body.data.id;
+    const createCommentResponse = await createPostComment(server, accessToken, postId, { content: 'Some content' });
 
-    const getCommentResponse = await getComment(server, createCommentResponse.body.data.comment.id);
+    const getCommentResponse = await getComment(server, createCommentResponse.body.data.id);
 
     expect(getCommentResponse.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(getCommentResponse.statusCode).toBe(200);
     expect(getCommentResponse.body).toMatchObject({
       status: 'success',
-      data: { comment: { id: 1, postId, content: 'Some content' } },
+      data: { id: 1, postId, content: 'Some content' },
     });
 
     await deletePost(server, accessToken, postId);
 
-    const getCommentAfterPostDeletionResponse = await getComment(server, getCommentResponse.body.data.comment.id);
+    const getCommentAfterPostDeletionResponse = await getComment(server, getCommentResponse.body.data.id);
 
     expect(getCommentAfterPostDeletionResponse.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(getCommentAfterPostDeletionResponse.statusCode).toBe(404);
@@ -250,12 +256,11 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    const commentResponse = await createComment(server, accessToken, {
-      postId: postResponse.body.data.post.id,
+    const commentResponse = await createPostComment(server, accessToken, postResponse.body.data.id, {
       content: 'Some content',
     });
 
-    const response = await deleteComment(server, 'invalid access token', commentResponse.body.data.comment.id);
+    const response = await deleteComment(server, 'invalid access token', commentResponse.body.data.id);
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
     expect(response.statusCode).toBe(401);
@@ -269,15 +274,19 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    const commentResponse = await createComment(server, firstUserResponse.body.data.accessToken, {
-      postId: postResponse.body.data.post.id,
-      content: 'Some content',
-    });
+    const commentResponse = await createPostComment(
+      server,
+      firstUserResponse.body.data.accessToken,
+      postResponse.body.data.id,
+      {
+        content: 'Some content',
+      },
+    );
 
     const response = await deleteComment(
       server,
       secondUserResponse.body.data.accessToken,
-      commentResponse.body.data.comment.id,
+      commentResponse.body.data.id,
     );
 
     expect(response.headers['content-type']).toBe('application/json; charset=utf-8');
@@ -292,7 +301,7 @@ describe('comments', () => {
       title: 'Some post title',
       content: 'Some post content',
     });
-    await createComment(server, accessToken, { postId: postResponse.body.data.post.id, content: 'Some content' });
+    await createPostComment(server, accessToken, postResponse.body.data.id, { content: 'Some content' });
 
     const response = await deleteComment(server, accessToken, 2);
 

@@ -24,7 +24,7 @@ export const updatePost = (
   id: number,
   body: UpdatePostDto,
 ): Promise<Response> => {
-  return supertest(server).put(`${POSTS_API}/${id}`).set('Authorization', `Bearer ${accessToken}`).send(body);
+  return supertest(server).patch(`${POSTS_API}/${id}`).set('Authorization', `Bearer ${accessToken}`).send(body);
 };
 
 export const deletePost = (server: RawServerDefault, accessToken: string, id: number): Promise<Response> => {

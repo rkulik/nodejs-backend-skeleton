@@ -36,14 +36,7 @@ export const createPostSchema = {
         type: 'object',
         properties: {
           status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              post: postSchema,
-            },
-            required: ['post'],
-            additionalProperties: false,
-          },
+          data: postSchema,
         },
         required: ['status', 'data'],
         additionalProperties: false,
@@ -63,15 +56,8 @@ export const getPostsSchema = {
         properties: {
           status: { type: 'string' },
           data: {
-            type: 'object',
-            properties: {
-              posts: {
-                type: 'array',
-                items: postSchema,
-              },
-            },
-            required: ['posts'],
-            additionalProperties: false,
+            type: 'array',
+            items: postSchema,
           },
         },
         required: ['status', 'data'],
@@ -96,14 +82,7 @@ export const getPostSchema = {
         type: 'object',
         properties: {
           status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              post: postSchema,
-            },
-            required: ['post'],
-            additionalProperties: false,
-          },
+          data: postSchema,
         },
         required: ['status', 'data'],
         additionalProperties: false,
@@ -138,14 +117,7 @@ export const updatePostSchema = {
         type: 'object',
         properties: {
           status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              post: postSchema,
-            },
-            required: ['post'],
-            additionalProperties: false,
-          },
+          data: postSchema,
         },
         required: ['status', 'data'],
         additionalProperties: false,
@@ -193,14 +165,7 @@ export const publishPostSchema = {
         type: 'object',
         properties: {
           status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              post: postSchema,
-            },
-            required: ['post'],
-            additionalProperties: false,
-          },
+          data: postSchema,
         },
         required: ['status', 'data'],
         additionalProperties: false,
@@ -229,14 +194,7 @@ export const unpublishPostSchema = {
         type: 'object',
         properties: {
           status: { type: 'string' },
-          data: {
-            type: 'object',
-            properties: {
-              post: postSchema,
-            },
-            required: ['post'],
-            additionalProperties: false,
-          },
+          data: postSchema,
         },
         required: ['status', 'data'],
         additionalProperties: false,

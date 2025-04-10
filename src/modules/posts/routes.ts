@@ -16,29 +16,29 @@ const posts: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
   const publishedPostsController = server.factory.createPublishedPostsController();
 
   server.post('/posts', { ...createPostSchema, preHandler: ensureAuthenticated }, (request, reply) => {
-    reply.code(201).sendSuccess({ post: postsController.create(request.body, request.tokenPayload!.user.id) });
+    reply.code(201).sendSuccess(postsController.create(request.body, request.tokenPayload!.user.id));
   });
 
   server.get('/posts', getPostsSchema, (_request, reply) => {
-    reply.sendSuccess({ posts: postsController.readAll() });
+    reply.sendSuccess(postsController.readAll());
   });
 
   server.get('/posts/:id', getPostSchema, (request, reply) => {
     const post = postsController.read(request.params.id);
     if (post) {
-      reply.sendSuccess({ post });
+      reply.sendSuccess(post);
     } else {
       reply.code(404).sendFail({ message: 'Post not found' });
     }
   });
 
-  server.put(
+  server.patch(
     '/posts/:id',
     { ...updatePostSchema, preHandler: [ensureAuthenticated, checkPostExistenceAndOwnership] },
     (request, reply) => {
       const updatedPost = postsController.update(request.params.id, request.body);
       if (updatedPost) {
-        reply.sendSuccess({ post: updatedPost });
+        reply.sendSuccess(updatedPost);
       } else {
         reply.code(404).sendFail({ message: 'Post not found' });
       }
@@ -64,7 +64,7 @@ const posts: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
     (request, reply) => {
       const publishedPost = publishedPostsController.create(request.body);
       if (publishedPost) {
-        reply.sendSuccess({ post: publishedPost });
+        reply.sendSuccess(publishedPost);
       } else {
         reply.code(404).sendFail({ message: 'Post not found' });
       }
@@ -77,7 +77,7 @@ const posts: FastifyPluginCallbackJsonSchemaToTs = (server, _options, done) => {
     (request, reply) => {
       const unpublishedPost = publishedPostsController.delete(request.params.id);
       if (unpublishedPost) {
-        reply.sendSuccess({ post: unpublishedPost });
+        reply.sendSuccess(unpublishedPost);
       } else {
         reply.code(404).sendFail({ message: 'Post not found' });
       }

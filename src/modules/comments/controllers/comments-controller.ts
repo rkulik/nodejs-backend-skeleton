@@ -1,12 +1,8 @@
 import type { Factory } from '@app/factory';
-import type { Comment, CreateCommentDto, UpdateCommentDto } from '@app/modules/comments/schemas/base';
+import type { Comment, UpdateCommentDto } from '@app/modules/comments/schemas/base';
 
 export class CommentsController {
   public constructor(private factory: Factory) {}
-
-  public create(createCommentDto: CreateCommentDto, userId: number): Comment | undefined {
-    return this.factory.createCreateCommentAction().execute(createCommentDto, userId);
-  }
 
   public read(id: number): Comment | undefined {
     return this.factory.createReadCommentAction().execute(id);
